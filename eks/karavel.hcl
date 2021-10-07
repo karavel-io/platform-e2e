@@ -129,7 +129,7 @@ component "prometheus" {
 
   store = "s3"
   s3 = {
-    bucket = "karavel-eks-e2e-cluster-metrics-prometheus"
+    bucket = "karavel-eks-e2e-metrics-prometheus"
     region = "eu-west-1"
     eksRole = "arn:aws:iam::568706034652:role/KaravelE2ePrometheusRole"
   }
@@ -143,7 +143,7 @@ component "loki" {
 
   store = "s3"
   s3 = {
-    bucket = "karavel-eks-e2e-cluster-logging-loki"
+    bucket = "karavel-eks-e2e-logging-loki"
     region = "eu-west-1"
     eksRole = "arn:aws:iam::568706034652:role/KaravelE2eLokiRole"
   }
@@ -170,7 +170,7 @@ component "velero" {
   backups = {
     provider = "aws"
     s3 = {
-      bucket = "karavel-eks-e2e-cluster-backups"
+      bucket = "karavel-eks-e2e-backups"
       region = "eu-west-1"
     }
   }

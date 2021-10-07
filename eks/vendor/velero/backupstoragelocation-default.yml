@@ -15,5 +15,5 @@ spec:
     region: eu-west-1
     serverSideEncryption: AES256
   objectStorage:
-    bucket: karavel-eks-e2e-cluster-backups
+    bucket: karavel-eks-e2e-backups
   provider: aws

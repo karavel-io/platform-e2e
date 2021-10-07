@@ -10,6 +10,7 @@ metadata:
     karavel.io/component-name: argocd
     karavel.io/component-version: 0.1.0-SNAPSHOT
   name: argocd-applicationset-controller
+  namespace: argocd
 rules:
 - apiGroups:
   - argoproj.io

@@ -15,7 +15,7 @@ data:
     \ boltdb_shipper:\n    active_index_directory: /data/loki/boltdb-shipper-active\n
     \   cache_location: /data/loki/boltdb-shipper-cache\n    cache_ttl: 24h         #
     Can be increased for faster performance over longer query periods, uses more disk
-    space\n    shared_store: s3\n  aws:\n    s3: s3://eu-west-1/karavel-eks-e2e-cluster-logging-loki\n
+    space\n    shared_store: s3\n  aws:\n    s3: s3://eu-west-1/karavel-eks-e2e-logging-loki\n
     \   endpoint: \n    sse_encryption: true\n    insecure: false\n    s3forcepathstyle:
     false\nchunk_store_config:\n  max_look_back_period: 0s\ntable_manager:\n  retention_deletes_enabled:
     false\n  retention_period: 0s\ncompactor:\n  working_directory: /data/loki/boltdb-shipper-compactor\n

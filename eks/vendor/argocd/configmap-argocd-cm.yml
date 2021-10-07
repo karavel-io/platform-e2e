@@ -3,7 +3,7 @@ data:
   admin.enabled: "false"
   application.instanceLabelKey: argocd.argoproj.io/instance
   oidc.config: |
-    name: Dex
+    name: Karavel
     issuer: https://auth.eks.e2e.karavel.io
     clientID: $dex-argocd-credentials:clientID
     clientSecret: $dex-argocd-credentials:clientSecret
