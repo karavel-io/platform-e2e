@@ -37,7 +37,6 @@ spec:
         - --source=crd
         - --crd-source-apiversion=externaldns.k8s.io/v1alpha1
         - --crd-source-kind=DNSEndpoint
-#        - --domain-filter=eks.e2e.karavel.io
         - --provider=aws
         - --txt-owner-id=Z02598523M9WR611ST687
         image: k8s.gcr.io/external-dns/external-dns:v0.10.0

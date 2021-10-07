@@ -32,8 +32,6 @@ component "external-dns" {
 
   # Params
 
-  domainFilter = "eks.e2e.karavel.io"
-
   provider = "route53"
   route53 = {
     zoneId = "Z02598523M9WR611ST687"
@@ -91,7 +89,7 @@ component "argocd" {
   # Params
   publicURL = "https://deploy.eks.e2e.karavel.io"
 
-  adminGroup = "platform"
+  adminGroup = "karavel-io:platform"
 
   git = {
     repo = "git@github.com:karavel-io/platform-e2e.git"

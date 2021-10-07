@@ -2,9 +2,21 @@ apiVersion: v1
 data:
   admin.enabled: "false"
   application.instanceLabelKey: argocd.argoproj.io/instance
-  oidc.config: "name: Dex\nissuer: \nclientID: $dex-argocd-credentials:clientSecret\nclientSecret:
-    $dex-argocd-credentials:clientSecret\nrequestedScopes: [openid, profile, email, groups]\nrequestedIDTokenClaims:\n
-    \ email:\n    essential: true\n  groups:\n    essential: true\n"
+  oidc.config: |
+    name: Dex
+    issuer: https://auth.eks.e2e.karavel.io
+    clientID: $dex-argocd-credentials:clientID
+    clientSecret: $dex-argocd-credentials:clientSecret
+    requestedScopes:
+      - openid
+      - profile
+      - email
+      - groups
+    requestedIDTokenClaims:
+      email:
+        essential: true
+      groups:
+        essential: true
   resource.customizations: |
     admissionregistration.k8s.io/MutatingWebhookConfiguration:
       ignoreDifferences: |
