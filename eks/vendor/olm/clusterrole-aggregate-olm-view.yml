@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/part-of: olm
-    app.kubernetes.io/version: 0.17.0
+    app.kubernetes.io/version: 0.19.1
     karavel.io/component-name: olm
     karavel.io/component-version: 0.1.0-SNAPSHOT
     rbac.authorization.k8s.io/aggregate-to-admin: "true"

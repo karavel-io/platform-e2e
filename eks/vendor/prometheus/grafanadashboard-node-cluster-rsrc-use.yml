@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: node-cluster-rsrc-use.json
     name: grafana-dashboard-node-cluster-rsrc-use
-  name: node-cluster-rsrc-use
+  json: ""

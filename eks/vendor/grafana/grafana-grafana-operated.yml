@@ -36,7 +36,6 @@ spec:
       values:
       - grafana-operated
   deployment:
-    replicas: 1
     envFrom:
     - secretRef:
         name: grafana-secrets
@@ -51,6 +50,7 @@ spec:
       app.kubernetes.io/version: 8.1.7
       karavel.io/component-name: grafana
       karavel.io/component-version: 0.1.0-SNAPSHOT
+    replicas: 1
     skipCreateAdminAccount: false
     terminationGracePeriodSeconds: 60
   ingress:

@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: k8s-resources-node.json
     name: grafana-dashboard-k8s-resources-node
-  name: k8s-resources-node
+  json: ""

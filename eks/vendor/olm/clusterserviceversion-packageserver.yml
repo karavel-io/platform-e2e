@@ -2,7 +2,7 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
   labels:
-    olm.version: 0.17.0
+    olm.version: 0.19.1
   name: packageserver
   namespace: olm
 spec:
@@ -77,7 +77,7 @@ spec:
                 - "5443"
                 - --global-namespace
                 - olm
-                image: quay.io/operator-framework/olm:v0.17.0
+                image: quay.io/operator-framework/olm:v0.19.1
                 imagePullPolicy: Always
                 livenessProbe:
                   httpGet:
@@ -132,4 +132,4 @@ spec:
   minKubeVersion: 1.11.0
   provider:
     name: Red Hat
-  version: 0.17.0
+  version: 0.19.1

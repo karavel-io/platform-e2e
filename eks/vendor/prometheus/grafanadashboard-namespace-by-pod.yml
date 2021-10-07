@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: namespace-by-pod.json
     name: grafana-dashboard-namespace-by-pod
-  name: namespace-by-pod
+  json: ""

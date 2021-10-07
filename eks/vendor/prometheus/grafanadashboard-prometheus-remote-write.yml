@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: prometheus-remote-write.json
     name: grafana-dashboard-prometheus-remote-write
-  name: prometheus-remote-write
+  json: ""

@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/name: ingress-nginx-controller
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 0.44.0
+    app.kubernetes.io/version: 1.0.3
     karavel.io/component-name: ingress-nginx
     karavel.io/component-version: 0.1.0-SNAPSHOT
   name: ingress-nginx-controller
@@ -33,7 +33,7 @@ spec:
         app.kubernetes.io/managed-by: karavel
         app.kubernetes.io/name: ingress-nginx-controller
         app.kubernetes.io/part-of: ingress-nginx
-        app.kubernetes.io/version: 0.44.0
+        app.kubernetes.io/version: 1.0.3
         karavel.io/component-name: ingress-nginx
         karavel.io/component-version: 0.1.0-SNAPSHOT
     spec:
@@ -56,7 +56,7 @@ spec:
         - --default-backend-service=$(POD_NAMESPACE)/default-backend
         - --publish-service=$(POD_NAMESPACE)/ingress-nginx-controller
         - --election-id=ingress-controller-leader
-        - --ingress-class=nginx
+        - --controller-class=k8s.io/ingress-nginx
         - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
         - --tcp-services-configmap=$(POD_NAMESPACE)/ingress-nginx-tcp
         - --udp-services-configmap=$(POD_NAMESPACE)/ingress-nginx-udp
@@ -76,7 +76,7 @@ spec:
               fieldPath: metadata.namespace
         - name: LD_PRELOAD
           value: /usr/local/lib/libmimalloc.so
-        image: k8s.gcr.io/ingress-nginx/controller:v0.44.0
+        image: k8s.gcr.io/ingress-nginx/controller:v1.0.3
         imagePullPolicy: IfNotPresent
         lifecycle:
           preStop:

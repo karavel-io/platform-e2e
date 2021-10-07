@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: node-rsrc-use.json
     name: grafana-dashboard-node-rsrc-use
-  name: node-rsrc-use
+  json: ""

@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: namespace-by-workload.json
     name: grafana-dashboard-namespace-by-workload
-  name: namespace-by-workload
+  json: ""

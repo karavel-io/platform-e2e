@@ -17,7 +17,7 @@ spec:
     - name: alertmanager-operated
       namespace: monitoring
       port: web
-  image: quay.io/prometheus/prometheus:v2.28.0
+  image: quay.io/prometheus/prometheus:v2.30.3
   nodeSelector:
     kubernetes.io/os: linux
   podMetadata:
@@ -26,7 +26,7 @@ spec:
       app.kubernetes.io/managed-by: karavel
       app.kubernetes.io/name: prometheus-operated
       app.kubernetes.io/part-of: prometheus
-      app.kubernetes.io/version: 2.28.0
+      app.kubernetes.io/version: 2.30.3
       karavel.io/component-name: prometheus
       karavel.io/component-version: 0.1.0-SNAPSHOT
   podMonitorNamespaceSelector: {}
@@ -55,11 +55,11 @@ spec:
           requests:
             storage: 5Gi
   thanos:
-    image: quay.io/thanos/thanos:v0.21.1
+    image: quay.io/thanos/thanos:v0.23.1
     logFormat: logfmt
     logLevel: info
     objectStorageConfig:
       key: thanos.yaml
       name: prometheus-operated-thanos-config
-    version: v0.21.1
-  version: 2.28.0
+    version: v0.23.1
+  version: 2.30.3

@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: apiserver.json
     name: grafana-dashboard-apiserver
-  name: apiserver
+  json: ""

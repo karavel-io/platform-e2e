@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: nodes.json
     name: grafana-dashboard-nodes
-  name: nodes
+  json: ""

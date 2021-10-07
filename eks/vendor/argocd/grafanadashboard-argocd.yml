@@ -15,3 +15,4 @@ spec:
     key: dashboard.json
     name: grafana-dashboard-argocd
   json: ""
+  name: argocd

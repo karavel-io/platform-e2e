@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: statefulset.json
     name: grafana-dashboard-statefulset
-  name: statefulset
+  json: ""

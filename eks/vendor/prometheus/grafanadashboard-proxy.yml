@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: proxy.json
     name: grafana-dashboard-proxy
-  name: proxy
+  json: ""

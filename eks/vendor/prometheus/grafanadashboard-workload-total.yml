@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: workload-total.json
     name: grafana-dashboard-workload-total
-  name: workload-total
+  json: ""

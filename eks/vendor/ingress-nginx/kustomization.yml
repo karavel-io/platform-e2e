@@ -22,9 +22,7 @@ resources:
 - namespace-ingress-nginx.yml
 - poddisruptionbudget-default-backend.yml
 - poddisruptionbudget-ingress-nginx-controller.yml
-- podsecuritypolicy-ingress-nginx-admission.yml
 - podsecuritypolicy-ingress-nginx-backend.yml
-- podsecuritypolicy-ingress-nginx.yml
 - prometheusrule-ingress-nginx-controller.yml
 - role-ingress-nginx-admission.yml
 - role-ingress-nginx-backend.yml

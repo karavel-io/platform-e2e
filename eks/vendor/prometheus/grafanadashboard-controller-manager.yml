@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: controller-manager.json
     name: grafana-dashboard-controller-manager
-  name: controller-manager
+  json: ""

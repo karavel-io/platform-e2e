@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/name: prometheus-operator
     app.kubernetes.io/part-of: prometheus
-    app.kubernetes.io/version: 0.48.1
+    app.kubernetes.io/version: 0.51.1
     karavel.io/component-name: prometheus
     karavel.io/component-version: 0.1.0-SNAPSHOT
     prometheus: prometheus-operated

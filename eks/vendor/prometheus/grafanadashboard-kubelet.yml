@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: kubelet.json
     name: grafana-dashboard-kubelet
-  name: kubelet
+  json: ""

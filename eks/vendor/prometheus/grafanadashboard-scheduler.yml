@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: scheduler.json
     name: grafana-dashboard-scheduler
-  name: scheduler
+  json: ""
