@@ -1,17 +1,17 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: external-dns
+  name: loki
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
 spec:
   source:
     repoURL: git@github.com:karavel-io/platform-e2e.git
-    path: eks/vendor/external-dns
+    path: eks/unstable/vendor/loki
   destination:
     server: https://kubernetes.default.svc
-    namespace: external-dns
+    namespace: monitoring
   project: infrastructure
   syncPolicy:
     automated:

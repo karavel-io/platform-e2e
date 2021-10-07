@@ -1,17 +1,17 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: argocd
+  name: dex
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
 spec:
   source:
     repoURL: git@github.com:karavel-io/platform-e2e.git
-    path: eks/vendor/argocd
+    path: eks/unstable/vendor/dex
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: dex
   project: infrastructure
   syncPolicy:
     automated:

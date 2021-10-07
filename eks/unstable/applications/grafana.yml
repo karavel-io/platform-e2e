@@ -1,17 +1,17 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: velero
+  name: grafana
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
 spec:
   source:
     repoURL: git@github.com:karavel-io/platform-e2e.git
-    path: eks/vendor/velero
+    path: eks/unstable/vendor/grafana
   destination:
     server: https://kubernetes.default.svc
-    namespace: velero
+    namespace: monitoring
   project: infrastructure
   syncPolicy:
     automated:

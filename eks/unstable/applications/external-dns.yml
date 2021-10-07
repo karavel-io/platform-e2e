@@ -1,17 +1,17 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: olm
+  name: external-dns
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
 spec:
   source:
     repoURL: git@github.com:karavel-io/platform-e2e.git
-    path: eks/vendor/olm
+    path: eks/unstable/vendor/external-dns
   destination:
     server: https://kubernetes.default.svc
-    namespace: olm
+    namespace: external-dns
   project: infrastructure
   syncPolicy:
     automated:

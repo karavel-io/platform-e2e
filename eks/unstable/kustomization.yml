@@ -4,5 +4,5 @@ resources:
 - applications
 - projects
 - vendor/argocd
-- vendor/cert-manager
 - vendor/external-secrets
+- vendor/cert-manager

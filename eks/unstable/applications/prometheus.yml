@@ -1,17 +1,17 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: cert-manager
+  name: prometheus
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
 spec:
   source:
     repoURL: git@github.com:karavel-io/platform-e2e.git
-    path: eks/vendor/cert-manager
+    path: eks/unstable/vendor/prometheus
   destination:
     server: https://kubernetes.default.svc
-    namespace: cert-manager
+    namespace: monitoring
   project: infrastructure
   syncPolicy:
     automated:

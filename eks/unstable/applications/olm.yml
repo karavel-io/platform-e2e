@@ -1,17 +1,17 @@
 kind: Application
 apiVersion: argoproj.io/v1alpha1
 metadata:
-  name: external-secrets
+  name: olm
   namespace: argocd
   annotations:
     argocd.argoproj.io/manifest-generate-paths: .
 spec:
   source:
     repoURL: git@github.com:karavel-io/platform-e2e.git
-    path: eks/vendor/external-secrets
+    path: eks/unstable/vendor/olm
   destination:
     server: https://kubernetes.default.svc
-    namespace: external-secrets
+    namespace: olm
   project: infrastructure
   syncPolicy:
     automated:
