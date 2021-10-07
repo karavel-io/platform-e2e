@@ -17,7 +17,7 @@ export class ExternalSecrets extends Construct {
       roleName,
       assumedBy: clusterPrincipalForServiceAccount(this, clusterOidcProvider, [{
         namespace: 'external-secrets',
-        name: 'external-secrets',
+        name: 'external-secrets-default-store',
       }]),
       inlinePolicies: {
         SecretsManagerReadOnlyAccess: new PolicyDocument({

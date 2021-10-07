@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  labels:
+    alertmanager: operated
+    app.kubernetes.io/component: alert-router
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: alertmanager
+    app.kubernetes.io/part-of: prometheus
+    app.kubernetes.io/version: 0.22.2
+    karavel.io/component-name: prometheus
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: alertmanager-operated
+  namespace: monitoring
+spec:
+  alertmanagerConfigNamespaceSelector: {}
+  alertmanagerConfigSelector:
+    matchLabels:
+      alertmanager: operated
+  configSecret: alertmanager-operated
+  image: quay.io/prometheus/alertmanager:v0.22.2
+  nodeSelector:
+    kubernetes.io/os: linux
+  podMetadata:
+    labels:
+      app.kubernetes.io/component: alert-router
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: alertmanager
+      app.kubernetes.io/part-of: prometheus
+      app.kubernetes.io/version: 0.22.2
+      karavel.io/component-name: prometheus
+      karavel.io/component-version: 0.1.0-SNAPSHOT
+  replicas: 3
+  resources: {}
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: alertmanager-operated
+  version: 0.22.2

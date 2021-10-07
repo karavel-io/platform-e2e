@@ -1,0 +1,18 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: goldpinger
+    app.kubernetes.io/part-of: goldpinger
+    app.kubernetes.io/version: 3.0.0
+    grafana.integreatly.org/instance: grafana-operated
+    karavel.io/component-name: goldpinger
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: goldpinger
+  namespace: monitoring
+spec:
+  configMapRef:
+    key: goldpinger.json
+    name: grafana-dashboard-goldpinger
+  name: goldpinger

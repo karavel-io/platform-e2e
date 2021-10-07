@@ -1,0 +1,138 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: dex-operator
+    app.kubernetes.io/part-of: dex
+    app.kubernetes.io/version: 2.30.0
+    karavel.io/component-name: dex
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: dex-operator
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - events
+  - serviceaccounts
+  - services
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - events
+  - secrets
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - create
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - dex.coreos.com
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - dex.karavel.io
+  resources:
+  - dexclients
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - dex.karavel.io
+  resources:
+  - dexclients/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - dex.karavel.io
+  resources:
+  - dexclients/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - dex.karavel.io
+  resources:
+  - dexes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - dex.karavel.io
+  resources:
+  - dexes/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - dex.karavel.io
+  resources:
+  - dexes/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - clusterrolebindings
+  - clusterroles
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: ingress-nginx-controller-admission
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 0.44.0
+    karavel.io/component-name: ingress-nginx
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: ingress-nginx-controller-admission
+  namespace: ingress-nginx
+spec:
+  ports:
+  - name: https-webhook
+    port: 443
+    targetPort: webhook
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: ingress-nginx-controller
+    app.kubernetes.io/part-of: ingress-nginx
+    karavel.io/component-name: ingress-nginx
+  type: ClusterIP

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: olm
+    app.kubernetes.io/part-of: olm
+    app.kubernetes.io/version: 0.17.0
+    karavel.io/component-name: olm
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: olm-metrics
+  namespace: olm
+spec:
+  ports:
+  - name: metrics
+    port: 8081
+    targetPort: metrics
+  selector:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: olm
+    app.kubernetes.io/part-of: olm
+    karavel.io/component-name: olm
+  type: ClusterIP

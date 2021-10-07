@@ -104,6 +104,10 @@ component "argocd" {
   credentialsSecret = {
     key = "eks-e2e-cluster/argocd-pull-creds"
   }
+
+  dex = {
+    issuer = "https://auth.eks.e2e.karavel.io"
+  }
 }
 
 component "grafana" {

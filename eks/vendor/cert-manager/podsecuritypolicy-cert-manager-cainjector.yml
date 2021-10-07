@@ -1,0 +1,47 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  annotations:
+    apparmor.security.beta.kubernetes.io/allowedProfileNames: runtime/default
+    apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: docker/default
+    seccomp.security.alpha.kubernetes.io/defaultProfileName: docker/default
+  labels:
+    app.kubernetes.io/component: cainjector
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: cert-manager-cainjector
+    app.kubernetes.io/part-of: cert-manager
+    app.kubernetes.io/version: 1.5.4
+    karavel.io/component-name: cert-manager
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: cert-manager-cainjector
+spec:
+  allowPrivilegeEscalation: false
+  allowedCapabilities: []
+  fsGroup:
+    ranges:
+    - max: 1000
+      min: 1000
+    rule: MustRunAs
+  hostIPC: false
+  hostNetwork: false
+  hostPID: false
+  privileged: false
+  runAsUser:
+    ranges:
+    - max: 1000
+      min: 1000
+    rule: MustRunAs
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    ranges:
+    - max: 1000
+      min: 1000
+    rule: MustRunAs
+  volumes:
+  - configMap
+  - emptyDir
+  - projected
+  - secret
+  - downwardAPI

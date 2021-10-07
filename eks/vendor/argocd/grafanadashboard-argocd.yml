@@ -1,0 +1,17 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/version: 2.1.3
+    grafana.integreatly.org/instance: grafana-operated
+    karavel.io/component-name: argocd
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: argocd
+  namespace: argocd
+spec:
+  configMapRef:
+    key: dashboard.json
+    name: grafana-dashboard-argocd
+  name: argocd

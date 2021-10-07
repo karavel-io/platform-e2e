@@ -1,0 +1,37 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  labels:
+    app.kubernetes.io/component: default-backend
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: default-backend
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 0.44.0
+    karavel.io/component-name: ingress-nginx
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: ingress-nginx-backend
+  namespace: ingress-nginx
+spec:
+  allowPrivilegeEscalation: false
+  fsGroup:
+    ranges:
+    - max: 65535
+      min: 1
+    rule: MustRunAs
+  requiredDropCapabilities:
+  - ALL
+  runAsUser:
+    rule: MustRunAsNonRoot
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    ranges:
+    - max: 65535
+      min: 1
+    rule: MustRunAs
+  volumes:
+  - configMap
+  - emptyDir
+  - projected
+  - secret
+  - downwardAPI

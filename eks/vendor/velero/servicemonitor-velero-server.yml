@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: velero
+    app.kubernetes.io/part-of: velero
+    karavel.io/component-name: velero
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: velero-server
+  namespace: velero
+spec:
+  endpoints:
+  - interval: 15s
+    port: monitoring
+    scrapeTimeout: 10s
+  namespaceSelector:
+    matchNames:
+    - velero
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: velero
+      app.kubernetes.io/part-of: velero
+      karavel.io/component-name: velero

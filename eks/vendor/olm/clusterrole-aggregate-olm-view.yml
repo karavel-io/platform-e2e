@@ -1,0 +1,35 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/part-of: olm
+    app.kubernetes.io/version: 0.17.0
+    karavel.io/component-name: olm
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  name: aggregate-olm-view
+rules:
+- apiGroups:
+  - operators.coreos.com
+  resources:
+  - clusterserviceversions
+  - catalogsources
+  - installplans
+  - subscriptions
+  - operatorgroups
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - packages.operators.coreos.com
+  resources:
+  - packagemanifests
+  - packagemanifests/icon
+  verbs:
+  - get
+  - list
+  - watch

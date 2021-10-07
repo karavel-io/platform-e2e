@@ -1,0 +1,9 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: olm
+  namespace: olm
+spec:
+  groups:
+  - name: olm
+    rules: []

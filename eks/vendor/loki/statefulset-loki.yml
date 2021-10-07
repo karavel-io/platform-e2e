@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/part-of: loki
+    app.kubernetes.io/version: 2.2.0
+    karavel.io/component-name: loki
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: loki
+  namespace: monitoring
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/part-of: loki
+      karavel.io/component-name: loki
+  serviceName: loki-headless
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: karavel
+        app.kubernetes.io/name: loki
+        app.kubernetes.io/part-of: loki
+        app.kubernetes.io/version: 2.2.0
+        karavel.io/component-name: loki
+        karavel.io/component-version: 0.1.0-SNAPSHOT
+    spec:
+      containers:
+      - args:
+        - -config.file=/etc/loki/loki.yaml
+        image: grafana/loki:2.2.0
+        imagePullPolicy: IfNotPresent
+        name: loki
+        ports:
+        - containerPort: 3100
+          name: http-metrics
+          protocol: TCP
+        - containerPort: 7946
+          name: gossip
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: http-metrics
+          initialDelaySeconds: 45
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /etc/loki
+          name: config
+        - mountPath: /data
+          name: storage
+        - mountPath: /tmp/scratch
+          name: scratch
+        - mountPath: /rules
+          name: rules
+      securityContext:
+        fsGroup: 10001
+        runAsGroup: 10001
+        runAsNonRoot: true
+        runAsUser: 10001
+      serviceAccountName: loki
+      terminationGracePeriodSeconds: 4800
+      volumes:
+      - emptyDir: {}
+        name: scratch
+      - configMap:
+          name: loki-alerting-rules
+        name: rules
+      - configMap:
+          name: loki
+        name: config
+      - emptyDir: {}
+        name: storage
+  updateStrategy:
+    type: RollingUpdate

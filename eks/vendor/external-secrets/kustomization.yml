@@ -1,0 +1,17 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- clusterrole-external-secrets.yml
+- clusterrolebinding-external-secrets.yml
+- clustersecretstore-default.yml
+- customresourcedefinition-clustersecretstores.external-secrets.io.yml
+- customresourcedefinition-externalsecrets.external-secrets.io.yml
+- customresourcedefinition-secretstores.external-secrets.io.yml
+- deployment-external-secrets.yml
+- namespace-external-secrets.yml
+- role-external-secrets-leaderelection.yml
+- rolebinding-external-secrets-leaderelection.yml
+- service-external-secrets.yml
+- serviceaccount-external-secrets-default-store.yml
+- serviceaccount-external-secrets.yml
+- servicemonitor-external-secrets.yml

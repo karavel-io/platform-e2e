@@ -1,0 +1,17 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: nodes
+    app.kubernetes.io/part-of: prometheus
+    grafana.integreatly.org/instance: grafana-operated
+    karavel.io/component-name: prometheus
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: nodes
+  namespace: monitoring
+spec:
+  configMapRef:
+    key: nodes.json
+    name: grafana-dashboard-nodes
+  name: nodes

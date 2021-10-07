@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: goldpinger
+    app.kubernetes.io/part-of: goldpinger
+    app.kubernetes.io/version: 3.0.0
+    karavel.io/component-name: goldpinger
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: goldpinger
+  namespace: monitoring
+spec:
+  ports:
+  - name: http
+    nodePort: 30080
+    port: 8080
+  selector:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: goldpinger
+    app.kubernetes.io/part-of: goldpinger
+    karavel.io/component-name: goldpinger
+  type: NodePort

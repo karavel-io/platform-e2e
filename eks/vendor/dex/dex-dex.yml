@@ -1,0 +1,29 @@
+apiVersion: dex.karavel.io/v1alpha1
+kind: Dex
+metadata:
+  name: dex
+  namespace: dex
+spec:
+  connectors:
+  - config:
+      clientID: $GITHUB_CLIENT_ID
+      clientSecret: $GITHUB_CLIENT_SECRET
+      orgs:
+      - name: karavel-io
+        teams:
+        - platform
+      redirectURI: https://auth.eks.e2e.karavel.io/callback
+      teamNameField: slug
+      useLoginAsId: false
+    id: github
+    name: GitHub
+    type: github
+  envFrom:
+  - secretRef:
+      name: dex-secrets
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    tlsEnabled: true
+  publicURL: https://auth.eks.e2e.karavel.io
+  serviceAccountName: dex

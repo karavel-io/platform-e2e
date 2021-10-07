@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: olm-catalog-operator
+    app.kubernetes.io/part-of: olm
+    app.kubernetes.io/version: 0.17.0
+    karavel.io/component-name: olm
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: olm-catalog-operator
+  namespace: olm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: olm-catalog-operator
+      app.kubernetes.io/part-of: olm
+      karavel.io/component-name: olm
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: karavel
+        app.kubernetes.io/name: olm-catalog-operator
+        app.kubernetes.io/part-of: olm
+        app.kubernetes.io/version: 0.17.0
+        karavel.io/component-name: olm
+        karavel.io/component-version: 0.1.0-SNAPSHOT
+    spec:
+      containers:
+      - args:
+        - -namespace
+        - olm
+        - -configmapServerImage=quay.io/operator-framework/configmap-operator-registry:latest
+        - -util-image
+        - quay.io/operator-framework/olm:v0.17.0
+        command:
+        - /bin/catalog
+        image: quay.io/operator-framework/olm:v0.17.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        name: catalog-operator
+        ports:
+        - containerPort: 8080
+          name: operator
+          protocol: TCP
+        - containerPort: 8081
+          name: metrics
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        resources:
+          requests:
+            cpu: 10m
+            memory: 80Mi
+        terminationMessagePolicy: FallbackToLogsOnError
+      nodeSelector:
+        kubernetes.io/os: linux
+      serviceAccountName: olm-operator

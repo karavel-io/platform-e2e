@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: metrics-adapter
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: prometheus-adapter
+    app.kubernetes.io/part-of: prometheus
+    app.kubernetes.io/version: 0.8.4
+    karavel.io/component-name: prometheus
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: resource-metrics-auth-reader
+  namespace: kube-system
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: extension-apiserver-authentication-reader
+subjects:
+- kind: ServiceAccount
+  name: prometheus-adapter
+  namespace: monitoring

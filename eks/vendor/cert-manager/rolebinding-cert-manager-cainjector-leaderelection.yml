@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: cainjector
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: cert-manager-cainjector-leaderelection
+    app.kubernetes.io/part-of: cert-manager
+    app.kubernetes.io/version: 1.5.4
+    karavel.io/component-name: cert-manager
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: cert-manager-cainjector-leaderelection
+  namespace: cert-manager
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cert-manager-cainjector-leaderelection
+subjects:
+- kind: ServiceAccount
+  name: cert-manager-cainjector
+  namespace: cert-manager

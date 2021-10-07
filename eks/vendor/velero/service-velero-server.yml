@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: velero
+    app.kubernetes.io/part-of: velero
+    karavel.io/component-name: velero
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: velero-server
+  namespace: velero
+spec:
+  ports:
+  - name: monitoring
+    port: 8085
+    targetPort: monitoring
+  selector:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: velero
+    app.kubernetes.io/part-of: velero
+    karavel.io/component-name: velero
+  type: ClusterIP

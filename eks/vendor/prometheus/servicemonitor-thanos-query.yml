@@ -1,0 +1,31 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/component: query-layer
+    app.kubernetes.io/instance: thanos-query
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: thanos-query
+    app.kubernetes.io/part-of: prometheus
+    app.kubernetes.io/version: 0.21.1
+    karavel.io/component-name: prometheus
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: thanos-query
+  namespace: monitoring
+spec:
+  endpoints:
+  - port: http
+    relabelings:
+    - separator: /
+      sourceLabels:
+      - namespace
+      - pod
+      targetLabel: instance
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: query-layer
+      app.kubernetes.io/instance: thanos-query
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: thanos-query
+      app.kubernetes.io/part-of: prometheus
+      karavel.io/component-name: prometheus

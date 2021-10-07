@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: default-backend
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: default-backend
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 0.44.0
+    karavel.io/component-name: ingress-nginx
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: default-backend
+  namespace: ingress-nginx
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: default-backend
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: default-backend
+      app.kubernetes.io/part-of: ingress-nginx
+      karavel.io/component-name: ingress-nginx
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: default-backend
+        app.kubernetes.io/managed-by: karavel
+        app.kubernetes.io/name: default-backend
+        app.kubernetes.io/part-of: ingress-nginx
+        app.kubernetes.io/version: 0.44.0
+        karavel.io/component-name: ingress-nginx
+        karavel.io/component-version: 0.1.0-SNAPSHOT
+    spec:
+      containers:
+      - image: k8s.gcr.io/defaultbackend-amd64:1.5
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: default-backend
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 10m
+            memory: 20Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 65534
+      securityContext:
+        runAsNonRoot: true
+      serviceAccountName: default-backend
+      terminationGracePeriodSeconds: 60

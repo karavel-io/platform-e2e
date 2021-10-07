@@ -1,0 +1,28 @@
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: dex
+    app.kubernetes.io/part-of: dex
+    app.kubernetes.io/version: 2.30.0
+    karavel.io/component-name: dex
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: dex
+  namespace: dex
+spec:
+  maxReplicas: 5
+  metrics:
+  - resource:
+      name: memory
+      targetAverageUtilization: 80
+    type: Resource
+  - resource:
+      name: cpu
+      targetAverageUtilization: 70
+    type: Resource
+  minReplicas: 2
+  scaleTargetRef:
+    apiVersion: dex.karavel.io/v1alpha1
+    kind: Dex
+    name: dex

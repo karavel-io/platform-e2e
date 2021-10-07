@@ -1,0 +1,17 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: controller-manager
+    app.kubernetes.io/part-of: prometheus
+    grafana.integreatly.org/instance: grafana-operated
+    karavel.io/component-name: prometheus
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: controller-manager
+  namespace: monitoring
+spec:
+  configMapRef:
+    key: controller-manager.json
+    name: grafana-dashboard-controller-manager
+  name: controller-manager

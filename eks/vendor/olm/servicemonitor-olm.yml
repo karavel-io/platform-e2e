@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: olm
+    app.kubernetes.io/part-of: olm
+    app.kubernetes.io/version: 0.17.0
+    karavel.io/component-name: olm
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: olm
+  namespace: olm
+spec:
+  endpoints:
+  - path: /metrics
+    port: http
+  namespaceSelector:
+    matchNames:
+    - olm
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: olm
+      app.kubernetes.io/part-of: olm
+      karavel.io/component-name: olm

@@ -1,0 +1,146 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: ingress-nginx-controller
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 0.44.0
+    karavel.io/component-name: ingress-nginx
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+spec:
+  minReadySeconds: 0
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: ingress-nginx-controller
+      app.kubernetes.io/part-of: ingress-nginx
+      karavel.io/component-name: ingress-nginx
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/managed-by: karavel
+        app.kubernetes.io/name: ingress-nginx-controller
+        app.kubernetes.io/part-of: ingress-nginx
+        app.kubernetes.io/version: 0.44.0
+        karavel.io/component-name: ingress-nginx
+        karavel.io/component-version: 0.1.0-SNAPSHOT
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: controller
+                  app.kubernetes.io/managed-by: karavel
+                  app.kubernetes.io/name: ingress-nginx
+                  app.kubernetes.io/part-of: ingress-nginx
+                  karavel.io/component-name: ingress-nginx
+              topologyKey: kubernetes.io/hostname
+            weight: 100
+      containers:
+      - args:
+        - /nginx-ingress-controller
+        - --default-backend-service=$(POD_NAMESPACE)/default-backend
+        - --publish-service=$(POD_NAMESPACE)/ingress-nginx-controller
+        - --election-id=ingress-controller-leader
+        - --ingress-class=nginx
+        - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
+        - --tcp-services-configmap=$(POD_NAMESPACE)/ingress-nginx-tcp
+        - --udp-services-configmap=$(POD_NAMESPACE)/ingress-nginx-udp
+        - --validating-webhook=:8443
+        - --validating-webhook-certificate=/usr/local/certificates/cert
+        - --validating-webhook-key=/usr/local/certificates/key
+        - --health-check-path=/healthz
+        - --enable-ssl-passthrough
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: LD_PRELOAD
+          value: /usr/local/lib/libmimalloc.so
+        image: k8s.gcr.io/ingress-nginx/controller:v0.44.0
+        imagePullPolicy: IfNotPresent
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /wait-shutdown
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /healthz
+            port: 10254
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: controller
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 443
+          name: https
+          protocol: TCP
+        - containerPort: 10254
+          name: metrics
+          protocol: TCP
+        - containerPort: 8443
+          name: webhook
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 10254
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          requests:
+            cpu: 100m
+            memory: 90Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
+            drop:
+            - ALL
+          runAsUser: 101
+        volumeMounts:
+        - mountPath: /usr/local/certificates/
+          name: webhook-cert
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      securityContext:
+        runAsNonRoot: true
+      serviceAccountName: ingress-nginx
+      terminationGracePeriodSeconds: 300
+      volumes:
+      - name: webhook-cert
+        secret:
+          secretName: ingress-nginx-admission
