@@ -51,6 +51,7 @@ spec:
       karavel.io/component-name: grafana
       karavel.io/component-version: 0.1.0-SNAPSHOT
     skipCreateAdminAccount: false
+    terminationGracePeriodSeconds: 60
   ingress:
     enabled: true
     hostname: grafana.eks.e2e.karavel.io
