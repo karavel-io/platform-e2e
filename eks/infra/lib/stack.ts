@@ -58,7 +58,7 @@ export class E2eStack extends Stack {
       version: props.kubernetesVersion,
       vpc,
       defaultCapacity: 3,
-      defaultCapacityInstance: InstanceType.of(InstanceClass.M5A, InstanceSize.LARGE),
+      defaultCapacityInstance: InstanceType.of(InstanceClass.M5A, InstanceSize.XLARGE),
       defaultCapacityType: DefaultCapacityType.NODEGROUP,
     });
 
