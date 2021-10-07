@@ -14,4 +14,4 @@ spec:
   configMapRef:
     key: request-handling-performance.json
     name: grafana-dashboard-ingress-nginx-request-performance
-  name: nginx
+  json: ""
