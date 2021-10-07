@@ -16,4 +16,3 @@ spec:
     key: goldpinger.json
     name: grafana-dashboard-goldpinger
   json: ""
-  name: goldpinger
