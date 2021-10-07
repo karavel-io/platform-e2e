@@ -1,0 +1,30 @@
+kind: Application
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: dex
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/manifest-generate-paths: .
+spec:
+  source:
+    repoURL: git@github.com:karavel-io/platform-e2e.git
+    path: eks/vendor/dex
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dex
+  project: infrastructure
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - Validate=false
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m0s
