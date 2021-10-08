@@ -61,9 +61,9 @@ rules:
   - watch
   - create
 - apiGroups:
-  - extensions
-  resources:
   - networking.k8s.io
+  resources:
+  - ingresses
   verbs:
   - get
   - list
