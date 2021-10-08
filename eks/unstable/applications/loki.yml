@@ -22,6 +22,7 @@ spec:
     - Validate=false
     - CreateNamespace=true
     - ApplyOutOfSyncOnly=true
+    - SkipDryRunOnMissingResource=true
     retry:
       limit: 5
       backoff:
