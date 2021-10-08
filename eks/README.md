@@ -64,6 +64,12 @@ $ kustomize build | kubectl apply -f - # run it a second time to work around som
 Give the platform few minutes to bootstrap, and you should be able to access ArgoCD on https://deploy.eks.e2e.karavel.io. 
 The rest of the components should come up soon after.
 
+## Teardown
+
+When you're done, simply delete the CloudFormation stack from the AWS console or run `pnpm cdk destroy` from the [infra](infra)
+folder. Some resources, like S3 buckets, may fail to delete because they're busy or not empty. Mark them down and delete them
+manually from the AWS console. For S3 buckets, remember to first empty them, then delete them. Thanks Amazon!
+
 [Karavel Container Platform]: https://platform.karavel.io
 [Amazon EKS]: https://aws.amazon.com/eks/
 [CDK]: https://docs.aws.amazon.com/cdk/latest/guide/home.html
