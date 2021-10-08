@@ -11,6 +11,4 @@ resources:
 - deployment-grafana-operator.yml
 - dexclient-grafana.yml
 - grafana-grafana-operated.yml
-- role-grafana-operator.yml
-- rolebinding-grafana-operator.yml
 - serviceaccount-grafana-operator.yml

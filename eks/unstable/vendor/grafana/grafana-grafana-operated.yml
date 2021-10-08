@@ -38,8 +38,6 @@ spec:
   deployment:
     envFrom:
     - secretRef:
-        name: grafana-secrets
-    - secretRef:
         name: dex-grafana-credentials
     - configMapRef:
         name: grafana-dex-config
@@ -56,8 +54,6 @@ spec:
   ingress:
     enabled: true
     hostname: grafana.eks.e2e.karavel.io
-    path: /
-    pathType: Prefix
     labels:
       app.kubernetes.io/managed-by: karavel
       app.kubernetes.io/name: grafana-operated
@@ -65,6 +61,8 @@ spec:
       app.kubernetes.io/version: 8.1.7
       karavel.io/component-name: grafana
       karavel.io/component-version: 0.1.0-SNAPSHOT
+    path: /
+    pathType: Prefix
     tlsEnabled: true
     tlsSecretName: grafana-operated-tls
   jsonnet:
