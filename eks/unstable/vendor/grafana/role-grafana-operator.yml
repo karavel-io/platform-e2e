@@ -63,7 +63,7 @@ rules:
 - apiGroups:
   - extensions
   resources:
-  - ingresses
+  - networking.k8s.io
   verbs:
   - get
   - list
