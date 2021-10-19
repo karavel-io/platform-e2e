@@ -2,6 +2,13 @@
 
 This folder contains deployment code for testing the [Karavel Container Platform] on [Amazon EKS].
 
+## Requirements
+
+- Node 14 and pnpm (to deploy the AWS infrastructure)
+- the Karavel CLI (available from [GitHub](https://github.com/karavel-io/cli/actions/runs/1320466073))
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Kustomize](https://kustomize.io/) (the standalone version, not the one bundled with kubectl)
+
 ## Deploying the infrastructure
 
 The cloud infrastructure is deployed using [CDK]. NodeJS 14 and [pnpm] are required. You should have the AWS CLI already
