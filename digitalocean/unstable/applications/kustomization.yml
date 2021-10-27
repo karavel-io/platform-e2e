@@ -1,0 +1,17 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- argocd.yml
+- cert-manager.yml
+- dex.yml
+- external-dns.yml
+- external-secrets.yml
+- goldpinger.yml
+- grafana.yml
+- ingress-nginx.yml
+- loki.yml
+- olm.yml
+- prometheus.yml
+- tempo.yml
+- vault.yml
+- velero.yml

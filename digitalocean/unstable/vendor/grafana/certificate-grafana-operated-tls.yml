@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: grafana-operated-tls
+    app.kubernetes.io/part-of: grafana
+    app.kubernetes.io/version: 8.2.0
+    karavel.io/component-name: grafana
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: grafana-operated-tls
+  namespace: monitoring
+spec:
+  dnsNames:
+  - grafana.do.e2e.karavel.io
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-prod
+  secretName: grafana-operated-tls

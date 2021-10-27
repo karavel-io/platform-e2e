@@ -1,0 +1,19 @@
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: velero
+    app.kubernetes.io/part-of: velero
+    karavel.io/component-name: velero
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: default
+  namespace: velero
+spec:
+  config:
+    insecureSkipTLSVerify: "false"
+    region: eu-west-1
+    serverSideEncryption: AES256
+  objectStorage:
+    bucket: karavel-do-e2e-backups
+  provider: aws

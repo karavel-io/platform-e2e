@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: vault-tls
+    app.kubernetes.io/part-of: vault
+    app.kubernetes.io/version: 1.8.1
+    karavel.io/component-name: vault
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: vault-selfsigned-issuer
+  namespace: vault
+spec:
+  selfSigned: {}

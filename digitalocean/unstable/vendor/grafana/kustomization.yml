@@ -1,0 +1,14 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- certificate-grafana-operated-tls.yml
+- clusterrole-grafana-operator.yml
+- clusterrolebinding-grafana-operator.yml
+- configmap-grafana-dex-config.yml
+- customresourcedefinition-grafanadashboards.integreatly.org.yml
+- customresourcedefinition-grafanadatasources.integreatly.org.yml
+- customresourcedefinition-grafanas.integreatly.org.yml
+- deployment-grafana-operator.yml
+- dexclient-grafana.yml
+- grafana-grafana-operated.yml
+- serviceaccount-grafana-operator.yml

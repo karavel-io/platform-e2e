@@ -7,5 +7,8 @@ pkgs.mkShell {
         kubectl
         kustomize
         nodePackages.pnpm
+        awscli2
+        doctl
+        unstable.terraform
     ];
 }

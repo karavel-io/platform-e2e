@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cli
+  namespace: kube-system
+  annotations:
+    iam.amazonaws.com/role: karavel-e2e-testing-external-dns
+spec:
+  containers:
+    - name: cli
+      image: amazon/aws-cli:latest
+      command:
+        - bash
+        - -c
+        - "while true; do sleep 5; done"

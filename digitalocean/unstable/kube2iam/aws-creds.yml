@@ -1,0 +1,14 @@
+apiVersion: external-secrets.io/v1alpha1
+kind: ExternalSecret
+metadata:
+  name: kube2iam-aws-creds
+  labels:
+    app.kubernetes.io/name: kube2iam
+spec:
+  secretStoreRef:
+    name: default
+    kind: ClusterSecretStore
+  target:
+    creationPolicy: Owner
+  dataFrom:
+    - key: do-e2e-cluster/kube2iam-aws-creds

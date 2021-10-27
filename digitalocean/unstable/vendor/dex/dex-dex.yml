@@ -1,0 +1,21 @@
+apiVersion: dex.karavel.io/v1alpha1
+kind: Dex
+metadata:
+  name: dex
+  namespace: dex
+spec:
+  connectors:
+  - config: null
+    id: mock
+    name: Example
+    type: mockCallback
+  envFrom:
+  - secretRef:
+      name: dex-secrets
+      optional: true
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    tlsEnabled: true
+  publicURL: https://auth.do.e2e.karavel.io
+  serviceAccountName: dex

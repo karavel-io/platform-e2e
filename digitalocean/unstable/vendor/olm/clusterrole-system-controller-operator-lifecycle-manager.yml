@@ -1,0 +1,22 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: olm-operator
+    app.kubernetes.io/part-of: olm
+    app.kubernetes.io/version: 0.19.1
+    karavel.io/component-name: olm
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: system-controller-operator-lifecycle-manager
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- nonResourceURLs:
+  - '*'
+  verbs:
+  - '*'

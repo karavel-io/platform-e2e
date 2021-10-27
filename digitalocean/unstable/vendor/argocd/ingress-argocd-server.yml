@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: argocd-server
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/version: 2.1.3
+    karavel.io/component-name: argocd
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: argocd-server
+  namespace: argocd
+spec:
+  rules:
+  - host: deploy.do.e2e.karavel.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: argocd-server
+            port:
+              name: server
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - deploy.do.e2e.karavel.io
+    secretName: argocd-tls

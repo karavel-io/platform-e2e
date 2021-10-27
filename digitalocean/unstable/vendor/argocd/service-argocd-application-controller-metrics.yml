@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: application-controller
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: argocd-application-controller-metrics
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/version: 2.1.3
+    karavel.io/component-name: argocd
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: argocd-application-controller-metrics
+  namespace: argocd
+spec:
+  ports:
+  - name: metrics
+    port: 8082
+    protocol: TCP
+    targetPort: controller
+  selector:
+    app.kubernetes.io/component: application-controller
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: argocd-application-controller
+    app.kubernetes.io/part-of: argocd
+    karavel.io/component-name: argocd

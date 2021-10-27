@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: default-backend
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: default-backend
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 0.49.3
+    karavel.io/component-name: ingress-nginx
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: ingress-nginx-backend
+  namespace: ingress-nginx
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ingress-nginx-backend
+subjects:
+- kind: ServiceAccount
+  name: default-backend
+  namespace: ingress-nginx

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: tempo
+    app.kubernetes.io/part-of: tempo
+    app.kubernetes.io/service: headless
+    app.kubernetes.io/version: 1.1.0
+    karavel.io/component-name: tempo
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: tempo-headless
+  namespace: monitoring
+spec:
+  clusterIP: None
+  ports:
+  - name: http-metrics
+    port: 3200
+    protocol: TCP
+    targetPort: http-metrics
+  - name: gossip
+    port: 7946
+    protocol: TCP
+    targetPort: gossip
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: tempo
+    app.kubernetes.io/part-of: tempo
+    karavel.io/component-name: tempo

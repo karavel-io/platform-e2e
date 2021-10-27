@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: repo-server
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: argocd-repo-server
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/version: 2.1.3
+    karavel.io/component-name: argocd
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: argocd-repo-server
+  namespace: argocd
+spec:
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: repo-server
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: argocd-repo-server
+      app.kubernetes.io/part-of: argocd
+      karavel.io/component-name: argocd
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: repo-server
+        app.kubernetes.io/managed-by: karavel
+        app.kubernetes.io/name: argocd-repo-server
+        app.kubernetes.io/part-of: argocd
+        app.kubernetes.io/version: 2.1.3
+        karavel.io/component-name: argocd
+        karavel.io/component-version: 0.1.0-SNAPSHOT
+    spec:
+      containers:
+      - command:
+        - uid_entrypoint.sh
+        - argocd-repo-server
+        - --redis
+        - argocd-redis:6379
+        - --logformat
+        - text
+        - --loglevel
+        - info
+        env:
+        - name: TMPDIR
+          value: /tmp
+        image: quay.io/argoproj/argocd:v2.1.3
+        imagePullPolicy: IfNotPresent
+        name: repo-server
+        ports:
+        - containerPort: 8081
+          name: repo-server
+          protocol: TCP
+        - containerPort: 8084
+          name: metrics
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 2
+          httpGet:
+            path: /healthz
+            port: 8084
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+        volumeMounts:
+        - mountPath: /app/config/ssh
+          name: ssh-known-hosts
+        - mountPath: /tmp
+          name: tmp
+      priorityClassName: system-cluster-critical
+      volumes:
+      - configMap:
+          name: argocd-ssh-known-hosts-cm
+        name: ssh-known-hosts
+      - emptyDir:
+          medium: Memory
+        name: tmp

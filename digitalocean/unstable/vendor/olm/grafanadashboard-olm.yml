@@ -1,0 +1,17 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/part-of: olm
+    app.kubernetes.io/version: 0.19.1
+    grafana.integreatly.org/instance: grafana-operated
+    karavel.io/component-name: olm
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: olm
+  namespace: olm
+spec:
+  configMapRef:
+    key: olm.json
+    name: grafana-dashboard-olm
+  json: ""
