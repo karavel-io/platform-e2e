@@ -12,7 +12,6 @@ metadata:
   name: argocd-repo-server
   namespace: argocd
 spec:
-  replicas: 2
   revisionHistoryLimit: 5
   selector:
     matchLabels:

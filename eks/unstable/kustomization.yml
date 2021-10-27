@@ -1,8 +1,9 @@
 kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
-- applications
-- projects
-- vendor/argocd
-- vendor/cert-manager
-- vendor/external-secrets
+  - applications
+  - projects
+  - vendor/argocd
+  - vendor/cert-manager
+  - vendor/dex
+  - vendor/external-secrets
