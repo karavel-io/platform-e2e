@@ -1,13 +1,11 @@
-package pkg
+package tests
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"testing"
 
 	helper "github.com/vmware-tanzu/sonobuoy-plugins/plugin-helper"
-	v1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/e2e-framework/pkg/env"
 	"sigs.k8s.io/e2e-framework/pkg/envconf"
 )
@@ -19,13 +17,12 @@ const (
 var testenv env.Environment
 
 func TestMain(m *testing.M) {
-	// Assume we are running in the cluster as a Sonobuoy plugin.
-	testenv = env.NewInClusterConfig()
+	cfg, err := envconf.NewFromFlags()
+	if err != nil {
+		panic(err)
+	}
 
-	// Specifying a run ID so that multiple runs wouldn't collide. Allow a prefix to be set via env var
-	// so that a plugin configuration (yaml file) can easily set that without code changes.
-	nsPrefix := os.Getenv("NS_PREFIX")
-	runID := envconf.RandomName(nsPrefix, 4)
+	testenv = env.NewWithConfig(cfg)
 
 	// Create updateReporter; will also place into context during Setup for use in features.
 	updateReporter := helper.NewProgressReporter(0)
@@ -39,38 +36,12 @@ func TestMain(m *testing.M) {
 
 	testenv.BeforeEachTest(func(ctx context.Context, cfg *envconf.Config, t *testing.T) (context.Context, error) {
 		updateReporter.StartTest(t.Name())
-		return createNSForTest(ctx, cfg, t, runID)
+		return ctx, nil
 	})
 	testenv.AfterEachTest(func(ctx context.Context, cfg *envconf.Config, t *testing.T) (context.Context, error) {
 		updateReporter.StopTest(t.Name(), t.Failed(), t.Skipped(), nil)
-		return deleteNSForTest(ctx, cfg, t, runID)
+		return ctx, nil
 	})
 
 	os.Exit(testenv.Run(m))
-}
-
-// CreateNSForTest creates a random namespace with the runID as a prefix. It is stored in the context
-// so that the deleteNSForTest routine can look it up and delete it.
-func createNSForTest(ctx context.Context, cfg *envconf.Config, t *testing.T, runID string) (context.Context, error) {
-	ns := envconf.RandomName(runID, 10)
-	ctx = context.WithValue(ctx, nsKey(t), ns)
-
-	t.Logf("Creating NS %v for test %v", ns, t.Name())
-	nsObj := v1.Namespace{}
-	nsObj.Name = ns
-	return ctx, cfg.Client().Resources().Create(ctx, &nsObj)
-}
-
-// DeleteNSForTest looks up the namespace corresponding to the given test and deletes it.
-func deleteNSForTest(ctx context.Context, cfg *envconf.Config, t *testing.T, runID string) (context.Context, error) {
-	ns := fmt.Sprint(ctx.Value(nsKey(t)))
-	t.Logf("Deleting NS %v for test %v", ns, t.Name())
-
-	nsObj := v1.Namespace{}
-	nsObj.Name = ns
-	return ctx, cfg.Client().Resources().Delete(ctx, &nsObj)
-}
-
-func nsKey(t *testing.T) string {
-	return "NS-for-%v" + t.Name()
 }
