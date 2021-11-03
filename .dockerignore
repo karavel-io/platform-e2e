@@ -1,0 +1,5 @@
+**
+
+!tests/**/*.go
+!go.mod
+!go.sum
