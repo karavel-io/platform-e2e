@@ -4,7 +4,8 @@ in
 pkgs.mkShell {
     buildInputs = with pkgs; [
         nodejs-14_x
-        go_1_17
+        go
+        sonobuoy
         kubectl
         kustomize
         nodePackages.pnpm
