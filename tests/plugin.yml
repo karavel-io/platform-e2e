@@ -6,13 +6,7 @@ sonobuoy-config:
   description: The Karavel Container Platform E2E test suite
 spec:
   command: [./run.sh]
-#  command:
-#    - bash
-#  args:
-#    - -c
-##    - 'go tool test2json ./e2e.test -test.v | tee ${SONOBUOY_RESULTS_DIR}/out.json; sleep 5; echo ${SONOBUOY_RESULTS_DIR}/out.json > ${SONOBUOY_RESULTS_DIR}/done'
-#    - 'go test ./... -v -json | tee ${SONOBUOY_RESULTS_DIR}/out.json; echo ${SONOBUOY_RESULTS_DIR}/out.json > ${SONOBUOY_RESULTS_DIR}/done'
-  image: ghcr.io/karavel-io/platform-e2e:local
+  image: ghcr.io/karavel-io/platform-e2e:main
   env:
     - name: NS_PREFIX
       value: karavel-e2e
