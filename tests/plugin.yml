@@ -12,8 +12,10 @@ spec:
       value: karavel-e2e
     - name: SONOBUOY_PROGRESS_PORT
       value: "8099"
+    - name: RESULTS_DIR
+      value: /tmp/results
   name: plugin
   resources: {}
   volumeMounts:
-    - mountPath: /tmp/sonobuoy/results
+    - mountPath: /tmp/results
       name: results
