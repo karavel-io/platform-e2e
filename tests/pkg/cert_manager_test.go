@@ -18,11 +18,10 @@ func TestCertManager(t *testing.T) {
 			client := cfg.Client().Resources("cert-manager")
 
 			pods := corev1.PodList{}
-			if err := client.List(ctx, &pods, func(opts *v1.ListOptions) {
+			err := client.List(ctx, &pods, func(opts *v1.ListOptions) {
 				opts.LabelSelector = "karavel.io/component-name=cert-manager"
-			}); err != nil {
-				t.Fatal(err)
-			}
+			})
+			assert.NoError(t, err)
 
 			assert.Equal(t, 3, len(pods.Items), "expected 3 pods for cert-manager")
 
@@ -42,9 +41,8 @@ func TestCertManager(t *testing.T) {
 					Version: "v1",
 					Kind:    "ClusterIssuer",
 				})
-				if err := client.Get(ctx, "letsencrypt-"+iss, "", &issuer); err != nil {
-					t.Fatal(err)
-				}
+				err := client.Get(ctx, "letsencrypt-"+iss, "", &issuer)
+				assert.NoError(t, err)
 
 				conditions, found, err := unstructured.NestedSlice(issuer.UnstructuredContent(), "status", "conditions")
 				assert.NoError(t, err)

@@ -18,11 +18,10 @@ func TestExternalSecrets(t *testing.T) {
 			client := cfg.Client().Resources("external-secrets")
 
 			pods := corev1.PodList{}
-			if err := client.List(ctx, &pods, func(opts *v1.ListOptions) {
+			err := client.List(ctx, &pods, func(opts *v1.ListOptions) {
 				opts.LabelSelector = "karavel.io/component-name=external-secrets"
-			}); err != nil {
-				t.Fatal(err)
-			}
+			})
+			assert.NoError(t, err)
 
 			assert.Equal(t, 1, len(pods.Items), "expected only one pod for the External Secrets operator")
 
@@ -39,9 +38,8 @@ func TestExternalSecrets(t *testing.T) {
 				Version: "v1alpha1",
 				Kind:    "ClusterSecretStore",
 			})
-			if err := client.Get(ctx, "default", "", &store); err != nil {
-				t.Fatal(err)
-			}
+			err := client.Get(ctx, "default", "", &store)
+			assert.NoError(t, err)
 
 			ts := store.GetCreationTimestamp()
 			assert.False(t, (&ts).IsZero(), "default secret store should exist")
