@@ -17,4 +17,3 @@ spec:
   volumeMounts:
     - mountPath: /tmp/results
       name: results
-  imagePullPolicy: Always
