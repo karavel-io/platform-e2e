@@ -1,4 +1,4 @@
-module github.com/karavel/e2e/tests
+module github.com/karavel/platform-e2e/tests
 
 go 1.16
 
