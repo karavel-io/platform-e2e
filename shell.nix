@@ -6,7 +6,7 @@ pkgs.mkShell {
         nodejs-14_x
         go
         go-junit-report
-        sonobuoy
+        unstable.sonobuoy
         kubectl
         kustomize
         nodePackages.pnpm
