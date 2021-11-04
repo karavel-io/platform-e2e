@@ -1,9 +1,9 @@
 FROM golang:1.17-buster as tools
-RUN go install github.com/jstemmer/go-junit-report@v0.9.1
+RUN go install github.com/vakenbolt/go-test-report@v0.9.3
 
 FROM golang:1.17-buster as build
 
-COPY --from=tools /go/bin/go-junit-report /usr/local/bin/
+COPY --from=tools /go/bin/go-test-report /usr/local/bin/
 
 COPY ./pkg /src/pkg
 WORKDIR /src
