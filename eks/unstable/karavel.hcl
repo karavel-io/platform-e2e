@@ -157,7 +157,7 @@ component "tempo" {
 
  store = "s3"
  s3 = {
-   bucket = "karavel-eks-e2e-cluster-tracing-tempo"
+   bucket = "karavel-eks-e2e-tracing-tempo"
    region = "eu-west-1"
    eksRole = "arn:aws:iam::568706034652:role/KaravelE2eTempoRole"
  }

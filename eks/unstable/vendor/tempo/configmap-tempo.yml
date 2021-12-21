@@ -59,7 +59,7 @@ data:
           bloom_filter_false_positive: .05 # bloom filter false positive rate.  lower values create larger filters but fewer false positives
           index_downsample_bytes: 1000     # number of bytes per index record
         s3:
-          bucket: karavel-eks-e2e-cluster-tracing-tempo                    # how to store data in s3
+          bucket: karavel-eks-e2e-tracing-tempo                    # how to store data in s3
           endpoint: s3.amazonaws.com
           insecure: false
           region: eu-west-1
