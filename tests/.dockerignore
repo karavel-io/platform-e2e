@@ -1,0 +1,7 @@
+**
+
+!pkg/**/*.go
+!go.mod
+!go.sum
+!run.sh
+!Dockerfile

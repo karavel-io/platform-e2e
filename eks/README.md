@@ -2,6 +2,13 @@
 
 This folder contains deployment code for testing the [Karavel Container Platform] on [Amazon EKS].
 
+## Requirements
+
+- Node 14 and pnpm (to deploy the AWS infrastructure)
+- the Karavel CLI (available from [GitHub](https://github.com/karavel-io/cli/actions/runs/1320466073))
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Kustomize](https://kustomize.io/) (the standalone version, not the one bundled with kubectl)
+
 ## Deploying the infrastructure
 
 The cloud infrastructure is deployed using [CDK]. NodeJS 14 and [pnpm] are required. You should have the AWS CLI already
@@ -30,8 +37,9 @@ Currently, you need the following credential sets:
 
 Generate a new SSH key pair with the following command: `ssh-keygen -t ed25519 -C "Argo CD"`.
 Create the keys somewhere handy (we'll be deleting them in a few moments), then copy the secret key to AWS Secrets Manager
-in the `eks-e2e-cluster/argocd-pull-creds` secret. The key should be base64-encoded, on UNIX systems this is as easy as:
-`cat argo-secret-key.pem | base64 -w0`.
+in the `eks-e2e-cluster/argocd-pull-creds` secret. If you created the infrastructure with the provided CDK stack, the secret
+should already be present with a `sshPrivateKey` field and a randomly generated value. Replace that value with the new private key.
+The key should be base64-encoded, on UNIX systems this is as easy as: `cat argo-secret-key.pem | base64 -w0`.
 
 The public key (`argo-secret-key.pem.pub` in our example) should be added to the GitHub repository as a [deploy key](https://github.com/karavel-io/platform-e2e/settings/keys).
 

@@ -1,0 +1,21 @@
+sonobuoy-config:
+  driver: Job
+  plugin-name: karavel-e2e
+  result-format: gojson
+  source_url: https://raw.githubusercontent.com/karavel-io/platform-e2e/main/tests/plugin.yml
+  description: The Karavel Container Platform E2E test suite
+spec:
+  command: [./run.sh]
+  image: ghcr.io/karavel-io/platform-e2e:main
+  env:
+    - name: NS_PREFIX
+      value: karavel-e2e
+    - name: SONOBUOY_PROGRESS_PORT
+      value: "8099"
+    - name: RESULTS_DIR
+      value: /tmp/results
+  name: plugin
+  resources: {}
+  volumeMounts:
+    - mountPath: /tmp/results
+      name: results
