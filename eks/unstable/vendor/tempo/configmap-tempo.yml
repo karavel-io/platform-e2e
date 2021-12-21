@@ -1,0 +1,86 @@
+apiVersion: v1
+data:
+  tempo.yaml: |2
+
+    auth_enabled: false
+
+    server:
+      http_listen_port: 3200
+
+    distributor:
+      receivers:
+        jaeger:
+          protocols:
+            thrift_http:
+            grpc:
+            thrift_binary:
+            thrift_compact:
+        zipkin:
+        otlp:
+          protocols:
+            http:
+            grpc:
+        opencensus:
+
+    ingester:
+      trace_idle_period: 10s               # the length of time after a trace has not received spans to consider it complete and flush it
+      max_block_bytes: 1_000_000           # cut the head block when it hits this size or ...
+      max_block_duration: 5m               #   this much time passes
+      flush_check_period: 10s
+      lifecycler:
+        ring:
+          kvstore:
+            store: memberlist
+          replication_factor: 3
+        heartbeat_period: 100ms
+
+    compactor:
+      compaction:
+        compaction_window: 1h              # blocks in this time window will be compacted together
+        max_block_bytes: 100_000_000       # maximum size of compacted blocks
+        block_retention: 2190h             # Duration to keep blocks. 3 months
+        compacted_block_retention: 10m
+        chunk_size_bytes: 5
+
+    query_frontend:
+      query_shards: 20
+
+    storage:
+      trace:
+        backend: s3                        # backend configuration to use
+        wal:
+          path: /tmp/tempo/wal             # where to store the the wal locally
+          encoding: snappy               # wal encoding/compression.  options: none, gzip, lz4-64k, lz4-256k, lz4-1M, lz4, snappy, zstd, s2
+        pool:
+          max_workers: 100                 # the worker pool mainly drives querying, but is also used for polling the blocklist
+          queue_depth: 10000
+        block:
+          encoding: zstd
+          bloom_filter_false_positive: .05 # bloom filter false positive rate.  lower values create larger filters but fewer false positives
+          index_downsample_bytes: 1000     # number of bytes per index record
+        s3:
+          bucket: karavel-eks-e2e-cluster-tracing-tempo                    # how to store data in s3
+          endpoint: s3.amazonaws.com
+          insecure: false
+          region: eu-west-1
+
+    memberlist:
+      abort_if_cluster_join_fails: false
+      bind_port: 7946
+      join_members:
+        - tempo-headless.monitoring.svc.cluster.local:7946
+
+    #querier:
+    #  frontend_worker:
+    #    frontend_address: tempo:9095
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: tempo
+    app.kubernetes.io/part-of: tempo
+    app.kubernetes.io/version: 1.2.1
+    karavel.io/component-name: tempo
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: tempo
+  namespace: monitoring

@@ -149,19 +149,19 @@ component "loki" {
   }
 }
 
-//component "tempo" {
-//  version = "unstable:0.1.0-SNAPSHOT"
-//  namespace = "monitoring"
-//
-//  # Params
-//
-//  store = "s3"
-//  s3 = {
-//    bucket = "karavel-eks-e2e-cluster-tracing-tempo"
-//    region = "eu-west-1"
-//    eksRole = "arn:aws:iam::568706034652:role/KaravelE2eTempoRole"
-//  }
-//}
+component "tempo" {
+ version = "unstable:0.1.0-SNAPSHOT"
+ namespace = "monitoring"
+
+ # Params
+
+ store = "s3"
+ s3 = {
+   bucket = "karavel-eks-e2e-cluster-tracing-tempo"
+   region = "eu-west-1"
+   eksRole = "arn:aws:iam::568706034652:role/KaravelE2eTempoRole"
+ }
+}
 
 component "velero" {
   version = "unstable:0.1.0-SNAPSHOT"

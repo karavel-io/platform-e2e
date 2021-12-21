@@ -37,7 +37,7 @@ spec:
         - ghcr.io/dexidp/dex:v2.30.0
         command:
         - /manager
-        image: quay.io/karavel/dex-operator:main
+        image: ghcr.io/karavel-io/dex-operator:main
         imagePullPolicy: IfNotPresent
         name: manager
         ports:
@@ -50,10 +50,10 @@ spec:
         resources:
           limits:
             cpu: 100m
-            memory: 50Mi
+            memory: 100Mi
           requests:
             cpu: 100m
-            memory: 20Mi
+            memory: 50Mi
         volumeMounts:
         - mountPath: /tmp/k8s-webhook-server/serving-certs
           name: cert

@@ -7,7 +7,7 @@ metadata:
     app: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.5.4
+    app.kubernetes.io/version: v1.6.1
   name: issuers.cert-manager.io
 spec:
   conversion:
@@ -317,6 +317,8 @@ spec:
                                   - name
                                   type: object
                                 environment:
+                                  description: name of the Azure environment (default
+                                    AzurePublicCloud)
                                   enum:
                                   - AzurePublicCloud
                                   - AzureChinaCloud
@@ -324,10 +326,29 @@ spec:
                                   - AzureUSGovernmentCloud
                                   type: string
                                 hostedZoneName:
+                                  description: name of the DNS zone that should be
+                                    used
                                   type: string
+                                managedIdentity:
+                                  description: managed identity configuration, can
+                                    not be used at the same time as clientID, clientSecretSecretRef
+                                    or tenantID
+                                  properties:
+                                    clientID:
+                                      description: client ID of the managed identity,
+                                        can not be used at the same time as resourceID
+                                      type: string
+                                    resourceID:
+                                      description: resource ID of the managed identity,
+                                        can not be used at the same time as clientID
+                                      type: string
+                                  type: object
                                 resourceGroupName:
+                                  description: resource group the DNS zone is located
+                                    in
                                   type: string
                                 subscriptionID:
+                                  description: ID of the Azure subscription
                                   type: string
                                 tenantID:
                                   description: when specifying ClientID and ClientSecret
@@ -1145,7 +1166,7 @@ spec:
                                                               namespace". An empty
                                                               selector ({}) matches
                                                               all namespaces. This
-                                                              field is alpha-level
+                                                              field is beta-level
                                                               and is only honored
                                                               when PodAffinityNamespaceSelector
                                                               feature is enabled.
@@ -1399,7 +1420,7 @@ spec:
                                                           list means "this pod's namespace".
                                                           An empty selector ({}) matches
                                                           all namespaces. This field
-                                                          is alpha-level and is only
+                                                          is beta-level and is only
                                                           honored when PodAffinityNamespaceSelector
                                                           feature is enabled.
                                                         properties:
@@ -1646,7 +1667,7 @@ spec:
                                                               namespace". An empty
                                                               selector ({}) matches
                                                               all namespaces. This
-                                                              field is alpha-level
+                                                              field is beta-level
                                                               and is only honored
                                                               when PodAffinityNamespaceSelector
                                                               feature is enabled.
@@ -1900,7 +1921,7 @@ spec:
                                                           list means "this pod's namespace".
                                                           An empty selector ({}) matches
                                                           all namespaces. This field
-                                                          is alpha-level and is only
+                                                          is beta-level and is only
                                                           honored when PodAffinityNamespaceSelector
                                                           feature is enabled.
                                                         properties:
@@ -2443,7 +2464,7 @@ spec:
                 type: array
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -2733,6 +2754,8 @@ spec:
                                   - name
                                   type: object
                                 environment:
+                                  description: name of the Azure environment (default
+                                    AzurePublicCloud)
                                   enum:
                                   - AzurePublicCloud
                                   - AzureChinaCloud
@@ -2740,10 +2763,29 @@ spec:
                                   - AzureUSGovernmentCloud
                                   type: string
                                 hostedZoneName:
+                                  description: name of the DNS zone that should be
+                                    used
                                   type: string
+                                managedIdentity:
+                                  description: managed identity configuration, can
+                                    not be used at the same time as clientID, clientSecretSecretRef
+                                    or tenantID
+                                  properties:
+                                    clientID:
+                                      description: client ID of the managed identity,
+                                        can not be used at the same time as resourceID
+                                      type: string
+                                    resourceID:
+                                      description: resource ID of the managed identity,
+                                        can not be used at the same time as clientID
+                                      type: string
+                                  type: object
                                 resourceGroupName:
+                                  description: resource group the DNS zone is located
+                                    in
                                   type: string
                                 subscriptionID:
+                                  description: ID of the Azure subscription
                                   type: string
                                 tenantID:
                                   description: when specifying ClientID and ClientSecret
@@ -3561,7 +3603,7 @@ spec:
                                                               namespace". An empty
                                                               selector ({}) matches
                                                               all namespaces. This
-                                                              field is alpha-level
+                                                              field is beta-level
                                                               and is only honored
                                                               when PodAffinityNamespaceSelector
                                                               feature is enabled.
@@ -3815,7 +3857,7 @@ spec:
                                                           list means "this pod's namespace".
                                                           An empty selector ({}) matches
                                                           all namespaces. This field
-                                                          is alpha-level and is only
+                                                          is beta-level and is only
                                                           honored when PodAffinityNamespaceSelector
                                                           feature is enabled.
                                                         properties:
@@ -4062,7 +4104,7 @@ spec:
                                                               namespace". An empty
                                                               selector ({}) matches
                                                               all namespaces. This
-                                                              field is alpha-level
+                                                              field is beta-level
                                                               and is only honored
                                                               when PodAffinityNamespaceSelector
                                                               feature is enabled.
@@ -4316,7 +4358,7 @@ spec:
                                                           list means "this pod's namespace".
                                                           An empty selector ({}) matches
                                                           all namespaces. This field
-                                                          is alpha-level and is only
+                                                          is beta-level and is only
                                                           honored when PodAffinityNamespaceSelector
                                                           feature is enabled.
                                                         properties:
@@ -4859,7 +4901,7 @@ spec:
                 type: array
             type: object
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -5149,6 +5191,8 @@ spec:
                                   - name
                                   type: object
                                 environment:
+                                  description: name of the Azure environment (default
+                                    AzurePublicCloud)
                                   enum:
                                   - AzurePublicCloud
                                   - AzureChinaCloud
@@ -5156,10 +5200,29 @@ spec:
                                   - AzureUSGovernmentCloud
                                   type: string
                                 hostedZoneName:
+                                  description: name of the DNS zone that should be
+                                    used
                                   type: string
+                                managedIdentity:
+                                  description: managed identity configuration, can
+                                    not be used at the same time as clientID, clientSecretSecretRef
+                                    or tenantID
+                                  properties:
+                                    clientID:
+                                      description: client ID of the managed identity,
+                                        can not be used at the same time as resourceID
+                                      type: string
+                                    resourceID:
+                                      description: resource ID of the managed identity,
+                                        can not be used at the same time as clientID
+                                      type: string
+                                  type: object
                                 resourceGroupName:
+                                  description: resource group the DNS zone is located
+                                    in
                                   type: string
                                 subscriptionID:
+                                  description: ID of the Azure subscription
                                   type: string
                                 tenantID:
                                   description: when specifying ClientID and ClientSecret
@@ -5977,7 +6040,7 @@ spec:
                                                               namespace". An empty
                                                               selector ({}) matches
                                                               all namespaces. This
-                                                              field is alpha-level
+                                                              field is beta-level
                                                               and is only honored
                                                               when PodAffinityNamespaceSelector
                                                               feature is enabled.
@@ -6231,7 +6294,7 @@ spec:
                                                           list means "this pod's namespace".
                                                           An empty selector ({}) matches
                                                           all namespaces. This field
-                                                          is alpha-level and is only
+                                                          is beta-level and is only
                                                           honored when PodAffinityNamespaceSelector
                                                           feature is enabled.
                                                         properties:
@@ -6478,7 +6541,7 @@ spec:
                                                               namespace". An empty
                                                               selector ({}) matches
                                                               all namespaces. This
-                                                              field is alpha-level
+                                                              field is beta-level
                                                               and is only honored
                                                               when PodAffinityNamespaceSelector
                                                               feature is enabled.
@@ -6732,7 +6795,7 @@ spec:
                                                           list means "this pod's namespace".
                                                           An empty selector ({}) matches
                                                           all namespaces. This field
-                                                          is alpha-level and is only
+                                                          is beta-level and is only
                                                           honored when PodAffinityNamespaceSelector
                                                           feature is enabled.
                                                         properties:
@@ -7277,7 +7340,7 @@ spec:
         required:
         - spec
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -7568,6 +7631,8 @@ spec:
                                   - name
                                   type: object
                                 environment:
+                                  description: name of the Azure environment (default
+                                    AzurePublicCloud)
                                   enum:
                                   - AzurePublicCloud
                                   - AzureChinaCloud
@@ -7575,10 +7640,29 @@ spec:
                                   - AzureUSGovernmentCloud
                                   type: string
                                 hostedZoneName:
+                                  description: name of the DNS zone that should be
+                                    used
                                   type: string
+                                managedIdentity:
+                                  description: managed identity configuration, can
+                                    not be used at the same time as clientID, clientSecretSecretRef
+                                    or tenantID
+                                  properties:
+                                    clientID:
+                                      description: client ID of the managed identity,
+                                        can not be used at the same time as resourceID
+                                      type: string
+                                    resourceID:
+                                      description: resource ID of the managed identity,
+                                        can not be used at the same time as clientID
+                                      type: string
+                                  type: object
                                 resourceGroupName:
+                                  description: resource group the DNS zone is located
+                                    in
                                   type: string
                                 subscriptionID:
+                                  description: ID of the Azure subscription
                                   type: string
                                 tenantID:
                                   description: when specifying ClientID and ClientSecret
@@ -8396,7 +8480,7 @@ spec:
                                                               namespace". An empty
                                                               selector ({}) matches
                                                               all namespaces. This
-                                                              field is alpha-level
+                                                              field is beta-level
                                                               and is only honored
                                                               when PodAffinityNamespaceSelector
                                                               feature is enabled.
@@ -8650,7 +8734,7 @@ spec:
                                                           list means "this pod's namespace".
                                                           An empty selector ({}) matches
                                                           all namespaces. This field
-                                                          is alpha-level and is only
+                                                          is beta-level and is only
                                                           honored when PodAffinityNamespaceSelector
                                                           feature is enabled.
                                                         properties:
@@ -8897,7 +8981,7 @@ spec:
                                                               namespace". An empty
                                                               selector ({}) matches
                                                               all namespaces. This
-                                                              field is alpha-level
+                                                              field is beta-level
                                                               and is only honored
                                                               when PodAffinityNamespaceSelector
                                                               feature is enabled.
@@ -9151,7 +9235,7 @@ spec:
                                                           list means "this pod's namespace".
                                                           An empty selector ({}) matches
                                                           all namespaces. This field
-                                                          is alpha-level and is only
+                                                          is beta-level and is only
                                                           honored when PodAffinityNamespaceSelector
                                                           feature is enabled.
                                                         properties:

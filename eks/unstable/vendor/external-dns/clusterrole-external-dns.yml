@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/part-of: external-dns
-    app.kubernetes.io/version: 0.10.0
+    app.kubernetes.io/version: 0.10.2
     karavel.io/component-name: external-dns
     karavel.io/component-version: 0.1.0-SNAPSHOT
   name: external-dns

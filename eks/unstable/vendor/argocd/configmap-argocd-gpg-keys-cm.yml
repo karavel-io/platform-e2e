@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: 2.1.3
+    app.kubernetes.io/version: 2.2.0
     karavel.io/component-name: argocd
     karavel.io/component-version: 0.1.0-SNAPSHOT
   name: argocd-gpg-keys-cm

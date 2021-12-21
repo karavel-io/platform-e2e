@@ -5,10 +5,15 @@ resources:
 - clusterrole-grafana-operator.yml
 - clusterrolebinding-grafana-operator.yml
 - configmap-grafana-dex-config.yml
+- configmap-manager-config.yml
 - customresourcedefinition-grafanadashboards.integreatly.org.yml
 - customresourcedefinition-grafanadatasources.integreatly.org.yml
+- customresourcedefinition-grafananotificationchannels.integreatly.org.yml
 - customresourcedefinition-grafanas.integreatly.org.yml
 - deployment-grafana-operator.yml
 - dexclient-grafana.yml
 - grafana-grafana-operated.yml
+- role-leader-election.yml
+- rolebinding-leader-election.yml
+- service-grafana-operator-metrics.yml
 - serviceaccount-grafana-operator.yml

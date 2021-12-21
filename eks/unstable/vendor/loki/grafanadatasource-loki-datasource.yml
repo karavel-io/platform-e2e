@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/name: loki
     app.kubernetes.io/part-of: loki
-    app.kubernetes.io/version: 2.2.0
+    app.kubernetes.io/version: 2.4.1
     grafana.integreatly.org/instance: grafana-operated
     karavel.io/component-name: loki
     karavel.io/component-version: 0.1.0-SNAPSHOT
@@ -16,7 +16,11 @@ spec:
   - access: proxy
     editable: false
     jsonData:
-      derivedFields: []
+      derivedFields:
+      - datasourceUid: tempo
+        matcherRegex: '"(?:traceID|traceId|trace_id)":[ ]*"(\w*)"'
+        name: TraceID
+        url: $${__value.raw}
     name: Loki
     type: loki
     uid: loki

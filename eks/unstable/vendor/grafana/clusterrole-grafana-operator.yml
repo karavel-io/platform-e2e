@@ -5,118 +5,149 @@ metadata:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/name: grafana-operator
     app.kubernetes.io/part-of: grafana
-    app.kubernetes.io/version: 8.1.7
+    app.kubernetes.io/version: 8.3.3
     karavel.io/component-name: grafana
     karavel.io/component-version: 0.1.0-SNAPSHOT
   name: grafana-operator
 rules:
 - apiGroups:
-  - integreatly.org
-  resources:
-  - grafanadashboards
-  - grafanadashboards/status
-  verbs:
-  - get
-  - list
-  - update
-  - watch
-- apiGroups:
   - ""
   resources:
-  - namespaces
   - configmaps
+  - persistentvolumeclaims
+  - secrets
+  - serviceaccounts
+  - services
   verbs:
+  - create
+  - delete
   - get
   - list
+  - patch
+  - update
   - watch
 - apiGroups:
   - ""
   resources:
   - events
   verbs:
+  - create
   - get
   - list
-  - watch
-  - create
-  - delete
-  - update
   - patch
+  - watch
 - apiGroups:
   - ""
   resources:
   - pods
-  - services
-  - endpoints
-  - persistentvolumeclaims
-  - configmaps
-  - secrets
-  - serviceaccounts
-  - configmaps
   verbs:
   - get
   - list
-  - create
-  - update
-  - delete
-  - deletecollection
   - watch
 - apiGroups:
   - apps
+  - extensions
   resources:
   - deployments
   - deployments/finalizers
-  - daemonsets
-  - replicasets
-  - statefulsets
   verbs:
+  - create
+  - delete
   - get
   - list
-  - create
+  - patch
   - update
-  - delete
-  - deletecollection
-  - watch
-- apiGroups:
-  - route.openshift.io
-  resources:
-  - routes
-  - routes/custom-host
-  verbs:
-  - get
-  - list
-  - create
-  - update
-  - delete
-  - deletecollection
-  - watch
-  - create
-- apiGroups:
-  - extensions
-  - networking.k8s.io
-  resources:
-  - ingresses
-  verbs:
-  - get
-  - list
-  - create
-  - update
-  - delete
-  - deletecollection
   - watch
 - apiGroups:
   - integreatly.org
   resources:
-  - grafanas
-  - grafanas/status
-  - grafanas/finalizers
   - grafanadashboards
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - integreatly.org
+  resources:
+  - grafanadashboards/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - integreatly.org
+  resources:
   - grafanadatasources
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - integreatly.org
+  resources:
   - grafanadatasources/status
   verbs:
   - get
-  - list
-  - create
+  - patch
   - update
+- apiGroups:
+  - integreatly.org
+  resources:
+  - grafananotificationchannels
+  verbs:
+  - create
   - delete
-  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - integreatly.org
+  resources:
+  - grafananotificationchannels/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - integreatly.org
+  resources:
+  - grafanas
+  - grafanas/finalizers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - integreatly.org
+  resources:
+  - grafanas/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
   - watch

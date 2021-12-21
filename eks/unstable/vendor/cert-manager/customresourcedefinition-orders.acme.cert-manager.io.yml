@@ -7,7 +7,7 @@ metadata:
     app: cert-manager
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.5.4
+    app.kubernetes.io/version: v1.6.1
   name: orders.acme.cert-manager.io
 spec:
   conversion:
@@ -247,7 +247,7 @@ spec:
         required:
         - metadata
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -466,7 +466,7 @@ spec:
         required:
         - metadata
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}
@@ -686,7 +686,7 @@ spec:
         - metadata
         - spec
         type: object
-    served: true
+    served: false
     storage: false
     subresources:
       status: {}

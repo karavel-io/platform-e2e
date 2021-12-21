@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/name: grafana-operated
     app.kubernetes.io/part-of: grafana
-    app.kubernetes.io/version: 8.1.7
+    app.kubernetes.io/version: 8.3.3
     karavel.io/component-name: grafana
     karavel.io/component-version: 0.1.0-SNAPSHOT
   name: grafana-operated
@@ -45,7 +45,7 @@ spec:
       app.kubernetes.io/managed-by: karavel
       app.kubernetes.io/name: grafana-operated
       app.kubernetes.io/part-of: grafana
-      app.kubernetes.io/version: 8.1.7
+      app.kubernetes.io/version: 8.3.3
       karavel.io/component-name: grafana
       karavel.io/component-version: 0.1.0-SNAPSHOT
     replicas: 1
@@ -58,7 +58,7 @@ spec:
       app.kubernetes.io/managed-by: karavel
       app.kubernetes.io/name: grafana-operated
       app.kubernetes.io/part-of: grafana
-      app.kubernetes.io/version: 8.1.7
+      app.kubernetes.io/version: 8.3.3
       karavel.io/component-name: grafana
       karavel.io/component-version: 0.1.0-SNAPSHOT
     path: /
@@ -74,6 +74,6 @@ spec:
       app.kubernetes.io/managed-by: karavel
       app.kubernetes.io/name: grafana-operated
       app.kubernetes.io/part-of: grafana
-      app.kubernetes.io/version: 8.1.7
+      app.kubernetes.io/version: 8.3.3
       karavel.io/component-name: grafana
       karavel.io/component-version: 0.1.0-SNAPSHOT

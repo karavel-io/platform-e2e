@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/name: grafana-operator
     app.kubernetes.io/part-of: grafana
-    app.kubernetes.io/version: 8.1.7
+    app.kubernetes.io/version: 8.3.3
     karavel.io/component-name: grafana
     karavel.io/component-version: 0.1.0-SNAPSHOT
   name: grafana-operator
@@ -26,33 +26,50 @@ spec:
         app.kubernetes.io/managed-by: karavel
         app.kubernetes.io/name: grafana-operator
         app.kubernetes.io/part-of: grafana
-        app.kubernetes.io/version: 8.1.7
+        app.kubernetes.io/version: 8.3.3
         karavel.io/component-name: grafana
         karavel.io/component-version: 0.1.0-SNAPSHOT
     spec:
       containers:
-      - command:
-        - grafana-operator
+      - args:
+        - --zap-log-level=info
         - --scan-all
         - --grafana-image=docker.io/grafana/grafana
-        - --grafana-image-tag=8.1.7
+        - --grafana-image-tag=8.3.3
+        command:
+        - /manager
         env:
-        - name: TEMPLATE_PATH
-          value: /usr/local/bin/templates
-        - name: WATCH_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
         - name: POD_NAME
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: OPERATOR_NAME
-          value: grafana-operator
-        image: quay.io/grafana-operator/grafana-operator:v3.10.3
+        - name: WATCH_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: quay.io/grafana-operator/grafana-operator:v4.1.1
         imagePullPolicy: Always
-        name: grafana-operator
-        ports:
-        - containerPort: 60000
-          name: metrics
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 200m
+            memory: 300Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
       serviceAccountName: grafana-operator
+      terminationGracePeriodSeconds: 10

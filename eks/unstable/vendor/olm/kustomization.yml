@@ -11,6 +11,8 @@ resources:
 - customresourcedefinition-catalogsources.operators.coreos.com.yml
 - customresourcedefinition-clusterserviceversions.operators.coreos.com.yml
 - customresourcedefinition-installplans.operators.coreos.com.yml
+- customresourcedefinition-olmconfigs.operators.coreos.com.yml
+- customresourcedefinition-operatorconditions.operators.coreos.com.yml
 - customresourcedefinition-operatorgroups.operators.coreos.com.yml
 - customresourcedefinition-operators.operators.coreos.com.yml
 - customresourcedefinition-subscriptions.operators.coreos.com.yml

@@ -26,15 +26,15 @@ spec:
         app.kubernetes.io/managed-by: karavel
         app.kubernetes.io/name: prometheus-operator
         app.kubernetes.io/part-of: prometheus
-        app.kubernetes.io/version: 0.51.1
+        app.kubernetes.io/version: 0.53.0
         karavel.io/component-name: prometheus
         karavel.io/component-version: 0.1.0-SNAPSHOT
     spec:
       containers:
       - args:
         - --kubelet-service=kube-system/kubelet
-        - --prometheus-config-reloader=ghcr.io/prometheus-operator/prometheus-config-reloader:v0.51.1
-        image: ghcr.io/prometheus-operator/prometheus-operator:v0.51.1
+        - --prometheus-config-reloader=ghcr.io/prometheus-operator/prometheus-config-reloader:v0.53.0
+        image: ghcr.io/prometheus-operator/prometheus-operator:v0.53.0
         name: prometheus-operator
         ports:
         - containerPort: 8080

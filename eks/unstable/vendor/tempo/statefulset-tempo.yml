@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: tempo
+    app.kubernetes.io/part-of: tempo
+    app.kubernetes.io/version: 1.2.1
+    karavel.io/component-name: tempo
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: tempo
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: tempo
+      app.kubernetes.io/part-of: tempo
+      karavel.io/component-name: tempo
+  serviceName: tempo-headless
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: karavel
+        app.kubernetes.io/name: tempo
+        app.kubernetes.io/part-of: tempo
+        app.kubernetes.io/version: 1.2.1
+        karavel.io/component-name: tempo
+        karavel.io/component-version: 0.1.0-SNAPSHOT
+      name: tempo
+    spec:
+      containers:
+      - args:
+        - -target=all
+        - -config.file=/etc/tempo/tempo.yaml
+        image: grafana/tempo:1.2.1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /ready
+            port: tempo
+          initialDelaySeconds: 45
+        name: tempo
+        ports:
+        - containerPort: 3200
+          name: tempo
+        - containerPort: 6831
+          name: jaeger-compact
+        - containerPort: 6832
+          name: jaeger-binary
+        - containerPort: 14268
+          name: jaeger-http
+        - containerPort: 14250
+          name: jaeger-grpc
+        - containerPort: 4317
+          name: otlp-grpc
+        - containerPort: 4318
+          name: otlp-http
+        - containerPort: 9411
+          name: zipkin
+        - containerPort: 7946
+          name: gossip
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: tempo
+          initialDelaySeconds: 45
+        resources:
+          limits:
+            cpu: 300m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        volumeMounts:
+        - mountPath: /etc/tempo
+          name: config
+        - mountPath: /data
+          name: storage
+      restartPolicy: Always
+      securityContext:
+        fsGroup: 10001
+        runAsGroup: 10001
+        runAsNonRoot: true
+        runAsUser: 10001
+      serviceAccountName: tempo
+      volumes:
+      - configMap:
+          name: tempo
+        name: config
+      - emptyDir: {}
+        name: storage

@@ -1,0 +1,23 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDataSource
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: tempo
+    app.kubernetes.io/part-of: tempo
+    app.kubernetes.io/version: 1.2.1
+    grafana.integreatly.org/instance: grafana-operated
+    karavel.io/component-name: tempo
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: tempo-datasource
+  namespace: monitoring
+spec:
+  datasources:
+  - access: proxy
+    editable: false
+    name: Tempo
+    type: tempo
+    uid: tempo
+    url: http://tempo.monitoring:3200
+    version: 1
+  name: tempo.yaml

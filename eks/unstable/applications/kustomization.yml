@@ -12,4 +12,5 @@ resources:
 - loki.yml
 - olm.yml
 - prometheus.yml
+- tempo.yml
 - velero.yml

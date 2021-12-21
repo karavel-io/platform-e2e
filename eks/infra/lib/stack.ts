@@ -9,7 +9,7 @@ import {
   PublicSubnet,
   Vpc
 } from "@aws-cdk/aws-ec2";
-import { Cluster, DefaultCapacityType, KubernetesVersion } from "@aws-cdk/aws-eks";
+import { CapacityType, Cluster, DefaultCapacityType, KubernetesVersion, NodegroupAmiType } from "@aws-cdk/aws-eks";
 import { Dex } from "./dex";
 import { ArgoCD } from "./argocd";
 import { ObservabilityStorage } from "./observability-storage";
@@ -60,6 +60,13 @@ export class E2eStack extends Stack {
       defaultCapacity: 3,
       defaultCapacityInstance: InstanceType.of(InstanceClass.M5A, InstanceSize.XLARGE),
       defaultCapacityType: DefaultCapacityType.NODEGROUP,
+    });
+
+    cluster.addNodegroupCapacity('Other', {
+      instanceTypes: [InstanceType.of(InstanceClass.T3A, InstanceSize.LARGE), InstanceType.of(InstanceClass.T3A, InstanceSize.XLARGE)],
+      minSize: 2,
+      maxSize: 4,
+      capacityType: CapacityType.SPOT,
     });
 
     new ArgoCD(this, 'ArgoCD')

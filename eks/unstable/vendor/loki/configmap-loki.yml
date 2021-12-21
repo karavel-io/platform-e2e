@@ -3,19 +3,19 @@ data:
   loki.yaml: "\nauth_enabled: false\n\nserver:\n  http_listen_port: 3100\n\ningester:\n
     \ chunk_idle_period: 3m\n  chunk_block_size: 262144\n  chunk_retain_period: 1m\n
     \ max_transfer_retries: 0\n  chunk_encoding: snappy\n  lifecycler:\n    ring:\n
-    \     kvstore:\n        store: memberlist\n      replication_factor: 1\n\nmemberlist:\n
-    \ abort_if_cluster_join_fails: false\n  # Expose this port on all distributor,
-    ingester\n  # and querier replicas.\n  bind_port: 7946\n  # You can use a headless
-    k8s service for all distributor,\n  # ingester and querier components.\n  join_members:\n
-    \   - loki-headless.monitoring.svc.cluster.local:7946\n\n  max_join_backoff: 1m\n
-    \ max_join_retries: 10\n  min_join_backoff: 1s\n\nlimits_config:\n  enforce_metric_name:
-    false\n  reject_old_samples: true\n  reject_old_samples_max_age: 168h\n\nschema_config:\n
-    \ configs:\n    - from: 2020-10-24\n      store: boltdb-shipper\n      object_store:
-    s3\n      schema: v11\n      index:\n        prefix: index_\n        period: 24h\n\nstorage_config:\n
-    \ boltdb_shipper:\n    active_index_directory: /data/loki/boltdb-shipper-active\n
-    \   cache_location: /data/loki/boltdb-shipper-cache\n    cache_ttl: 24h         #
-    Can be increased for faster performance over longer query periods, uses more disk
-    space\n    shared_store: s3\n  aws:\n    s3: s3://eu-west-1/karavel-eks-e2e-logging-loki\n
+    \     kvstore:\n        store: memberlist\n      replication_factor: 1\n  wal:\n
+    \   enabled: true\n    dir: /data/loki/wal\n\nmemberlist:\n  abort_if_cluster_join_fails:
+    false\n  # Expose this port on all distributor, ingester\n  # and querier replicas.\n
+    \ bind_port: 7946\n  # You can use a headless k8s service for all distributor,\n
+    \ # ingester and querier components.\n  join_members:\n    - loki-headless.monitoring.svc.cluster.local:7946\n\n
+    \ max_join_backoff: 1m\n  max_join_retries: 10\n  min_join_backoff: 1s\n\nlimits_config:\n
+    \ enforce_metric_name: false\n  reject_old_samples: true\n  reject_old_samples_max_age:
+    168h\n\nschema_config:\n  configs:\n    - from: 2020-10-24\n      store: boltdb-shipper\n
+    \     object_store: s3\n      schema: v11\n      index:\n        prefix: index_\n
+    \       period: 24h\n\nstorage_config:\n  boltdb_shipper:\n    active_index_directory:
+    /data/loki/boltdb-shipper-active\n    cache_location: /data/loki/boltdb-shipper-cache\n
+    \   cache_ttl: 24h         # Can be increased for faster performance over longer
+    query periods, uses more disk space\n    shared_store: s3\n  aws:\n    s3: s3://eu-west-1/karavel-eks-e2e-logging-loki\n
     \   endpoint: \n    sse_encryption: true\n    insecure: false\n    s3forcepathstyle:
     false\nchunk_store_config:\n  max_look_back_period: 0s\ntable_manager:\n  retention_deletes_enabled:
     false\n  retention_period: 0s\ncompactor:\n  working_directory: /data/loki/boltdb-shipper-compactor\n
@@ -30,7 +30,7 @@ metadata:
     app.kubernetes.io/managed-by: karavel
     app.kubernetes.io/name: loki
     app.kubernetes.io/part-of: loki
-    app.kubernetes.io/version: 2.2.0
+    app.kubernetes.io/version: 2.4.1
     karavel.io/component-name: loki
     karavel.io/component-version: 0.1.0-SNAPSHOT
   name: loki
