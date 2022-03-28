@@ -1,0 +1,17 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: k8s-resources-cluster
+    app.kubernetes.io/part-of: prometheus
+    grafana.integreatly.org/instance: grafana-operated
+    karavel.io/component-name: prometheus
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: k8s-resources-cluster
+  namespace: monitoring
+spec:
+  configMapRef:
+    key: k8s-resources-cluster.json
+    name: grafana-dashboard-k8s-resources-cluster
+  json: ""

@@ -1,0 +1,25 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: goldpinger
+    app.kubernetes.io/part-of: goldpinger
+    app.kubernetes.io/version: 3.2.0
+    karavel.io/component-name: goldpinger
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: goldpinger
+  namespace: monitoring
+spec:
+  endpoints:
+  - path: /metrics
+    port: http
+  namespaceSelector:
+    matchNames:
+    - monitoring
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: goldpinger
+      app.kubernetes.io/part-of: goldpinger
+      karavel.io/component-name: goldpinger

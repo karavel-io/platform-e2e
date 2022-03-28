@@ -1,0 +1,48 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  labels:
+    app.kubernetes.io/component: cainjector
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: cert-manager-cainjector-leaderelection
+    app.kubernetes.io/part-of: cert-manager
+    app.kubernetes.io/version: 1.5.4
+    karavel.io/component-name: cert-manager
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: cert-manager-cainjector-leaderelection
+  namespace: cert-manager
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - cert-manager-cainjector-leader-election
+  - cert-manager-cainjector-leader-election-core
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+- apiGroups:
+  - coordination.k8s.io
+  resourceNames:
+  - cert-manager-cainjector-leader-election
+  - cert-manager-cainjector-leader-election-core
+  resources:
+  - leases
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create

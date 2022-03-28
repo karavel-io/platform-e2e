@@ -1,0 +1,16 @@
+apiVersion: dex.karavel.io/v1alpha1
+kind: DexClient
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  instanceRef:
+    name: dex
+    namespace: dex
+  name: ArgoCD
+  redirectUris:
+  - https://deploy.do.e2e.karavel.io/auth/callback
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/part-of: argocd

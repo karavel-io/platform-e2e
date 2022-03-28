@@ -1,0 +1,26 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- catalogsource-operatorhubio-catalog.yml
+- clusterrole-aggregate-olm-edit.yml
+- clusterrole-aggregate-olm-view.yml
+- clusterrole-system-controller-operator-lifecycle-manager.yml
+- clusterrolebinding-olm-operator-binding.yml
+- clusterserviceversion-packageserver.yml
+- configmap-grafana-dashboard-olm.yml
+- customresourcedefinition-catalogsources.operators.coreos.com.yml
+- customresourcedefinition-clusterserviceversions.operators.coreos.com.yml
+- customresourcedefinition-installplans.operators.coreos.com.yml
+- customresourcedefinition-operatorgroups.operators.coreos.com.yml
+- customresourcedefinition-operators.operators.coreos.com.yml
+- customresourcedefinition-subscriptions.operators.coreos.com.yml
+- deployment-olm-catalog-operator.yml
+- deployment-olm-operator.yml
+- grafanadashboard-olm.yml
+- namespace-operators.yml
+- operatorgroup-global-operators-operators.yml
+- operatorgroup-olm-operators.yml
+- prometheusrule-olm.yml
+- service-olm-metrics.yml
+- serviceaccount-olm-operator.yml
+- servicemonitor-olm.yml

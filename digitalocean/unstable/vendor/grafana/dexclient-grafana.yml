@@ -1,0 +1,14 @@
+apiVersion: dex.karavel.io/v1alpha1
+kind: DexClient
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  clientIDKey: GF_AUTH_GENERIC_OAUTH_CLIENT_ID
+  clientSecretKey: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+  instanceRef:
+    name: dex
+    namespace: dex
+  name: Grafana
+  redirectUris:
+  - https://grafana.do.e2e.karavel.io/login/generic_oauth

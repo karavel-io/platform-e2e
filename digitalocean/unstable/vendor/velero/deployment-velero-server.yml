@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: velero
+    app.kubernetes.io/part-of: velero
+    karavel.io/component-name: velero
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: velero-server
+  namespace: velero
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: velero
+      app.kubernetes.io/part-of: velero
+      karavel.io/component-name: velero
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: karavel
+        app.kubernetes.io/name: velero
+        app.kubernetes.io/part-of: velero
+        karavel.io/component-name: velero
+        karavel.io/component-version: 0.1.0-SNAPSHOT
+    spec:
+      containers:
+      - args:
+        - server
+        - --log-level=warning
+        - --log-format=text
+        command:
+        - /velero
+        env:
+        - name: VELERO_SCRATCH_DIR
+          value: /scratch
+        - name: VELERO_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: LD_LIBRARY_PATH
+          value: /plugins
+        image: velero/velero:v1.5.3
+        imagePullPolicy: IfNotPresent
+        name: velero
+        ports:
+        - containerPort: 8085
+          name: monitoring
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 300m
+            memory: 128Mi
+        volumeMounts:
+        - mountPath: /plugins
+          name: plugins
+        - mountPath: /scratch
+          name: scratch
+      initContainers:
+      - image: velero/velero-plugin-for-aws:v1.1.0
+        imagePullPolicy: IfNotPresent
+        name: velero-plugin-for-aws
+        volumeMounts:
+        - mountPath: /target
+          name: plugins
+      restartPolicy: Always
+      serviceAccountName: velero
+      volumes:
+      - emptyDir: {}
+        name: plugins
+      - emptyDir: {}
+        name: scratch

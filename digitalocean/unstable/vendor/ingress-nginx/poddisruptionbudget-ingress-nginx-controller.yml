@@ -1,0 +1,22 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: ingress-nginx-controller
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 0.49.3
+    karavel.io/component-name: ingress-nginx
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: ingress-nginx-controller
+      app.kubernetes.io/part-of: ingress-nginx
+      karavel.io/component-name: ingress-nginx

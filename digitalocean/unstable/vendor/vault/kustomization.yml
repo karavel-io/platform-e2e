@@ -1,0 +1,26 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- certificate-vault-secrets-webhook-tls.yml
+- certificate-vault-tls.yml
+- clusterrole-vault-operator.yml
+- clusterrole-vault-secrets-webhook.yml
+- clusterrolebinding-vault-auth-delegator.yml
+- clusterrolebinding-vault-operator.yml
+- clusterrolebinding-vault-secrets-webhook.yml
+- customresourcedefinition-vaults.vault.banzaicloud.com.yml
+- deployment-vault-operator.yml
+- deployment-vault-secrets-webhook.yml
+- issuer-vault-secrets-webhook-selfsigned-issuer.yml
+- issuer-vault-selfsigned-issuer.yml
+- mutatingwebhookconfiguration-vault-secrets-webhook.yml
+- namespace-vault.yml
+- poddisruptionbudget-vault-secrets-webhook.yml
+- role-vault.yml
+- rolebinding-vault.yml
+- service-vault-operator.yml
+- service-vault-secrets-webhook.yml
+- serviceaccount-vault-operator.yml
+- serviceaccount-vault-secrets-webhook.yml
+- serviceaccount-vault.yml
+- vault-vault.yml

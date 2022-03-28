@@ -1,0 +1,11 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- applications
+- external-secrets
+- kube2iam
+- projects
+- vendor/argocd
+- vendor/cert-manager
+- vendor/dex
+- vendor/vault

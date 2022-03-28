@@ -1,0 +1,20 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: loki
+    app.kubernetes.io/part-of: loki
+    app.kubernetes.io/version: 2.2.0
+    karavel.io/component-name: loki
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: loki
+  namespace: monitoring
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: loki
+      app.kubernetes.io/part-of: loki
+      karavel.io/component-name: loki

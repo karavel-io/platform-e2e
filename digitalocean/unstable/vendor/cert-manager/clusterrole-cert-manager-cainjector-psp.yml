@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: cainjector
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: cert-manager-cainjector-psp
+    app.kubernetes.io/part-of: cert-manager
+    app.kubernetes.io/version: 1.5.4
+    karavel.io/component-name: cert-manager
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: cert-manager-cainjector-psp
+rules:
+- apiGroups:
+  - policy
+  resourceNames:
+  - cert-manager-cainjector
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use

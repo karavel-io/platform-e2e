@@ -1,0 +1,11 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- clusterrolebinding-goldpinger.yml
+- configmap-grafana-dashboard-goldpinger.yml
+- daemonset-goldpinger.yml
+- grafanadashboard-goldpinger.yml
+- prometheusrule-goldpinger.yml
+- service-goldpinger.yml
+- serviceaccount-goldpinger.yml
+- servicemonitor-goldpinger.yml

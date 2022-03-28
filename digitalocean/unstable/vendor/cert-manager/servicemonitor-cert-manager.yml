@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/part-of: cert-manager
+    app.kubernetes.io/version: 1.5.4
+    karavel.io/component-name: cert-manager
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+    prometheus: default
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  endpoints:
+  - interval: 60s
+    path: /metrics
+    scrapeTimeout: 30s
+    targetPort: metrics
+  namespaceSelector:
+    matchNames:
+    - cert-manager
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/managed-by: karavel
+      app.kubernetes.io/name: cert-manager
+      app.kubernetes.io/part-of: cert-manager
+      karavel.io/component-name: cert-manager

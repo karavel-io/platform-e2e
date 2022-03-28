@@ -1,0 +1,29 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    helm.sh/hook: pre-install,pre-upgrade,post-install,post-upgrade
+  labels:
+    app.kubernetes.io/managed-by: karavel
+    app.kubernetes.io/name: vault
+    app.kubernetes.io/part-of: vault
+    app.kubernetes.io/version: 1.8.1
+    karavel.io/component-name: vault
+    karavel.io/component-version: 0.1.0-SNAPSHOT
+  name: vault-tls
+  namespace: vault
+spec:
+  dnsNames:
+  - vault
+  - vault.vault
+  - vault.vault.svc
+  - vault.vault.svc.cluster.local
+  ipAddresses:
+  - 127.0.0.1
+  issuerRef:
+    kind: Issuer
+    name: vault-selfsigned-issuer
+  secretName: vault-tls
+  usages:
+  - server auth

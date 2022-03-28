@@ -1,0 +1,9 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- configmap-tempo.yml
+- grafanadatasource-tempo-datasource.yml
+- service-tempo-headless.yml
+- service-tempo.yml
+- serviceaccount-tempo.yml
+- statefulset-tempo.yml

@@ -1,0 +1,21 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+resources:
+- backupstoragelocation-default.yml
+- clusterrolebinding-velero-server.yml
+- customresourcedefinition-backups.velero.io.yml
+- customresourcedefinition-backupstoragelocations.velero.io.yml
+- customresourcedefinition-deletebackuprequests.velero.io.yml
+- customresourcedefinition-downloadrequests.velero.io.yml
+- customresourcedefinition-podvolumebackups.velero.io.yml
+- customresourcedefinition-podvolumerestores.velero.io.yml
+- customresourcedefinition-resticrepositories.velero.io.yml
+- customresourcedefinition-restores.velero.io.yml
+- customresourcedefinition-schedules.velero.io.yml
+- customresourcedefinition-serverstatusrequests.velero.io.yml
+- customresourcedefinition-volumesnapshotlocations.velero.io.yml
+- deployment-velero-server.yml
+- service-velero-server.yml
+- serviceaccount-velero.yml
+- servicemonitor-velero-server.yml
+- volumesnapshotlocation-default.yml
